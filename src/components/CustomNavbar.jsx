@@ -1,6 +1,10 @@
+// CustomNavbar.js
+
 import React, { useState } from 'react';
-import { Navbar, Nav, Form, FormControl, Button, Offcanvas, Container } from 'react-bootstrap';
+import { Offcanvas, Nav, Button } from 'react-bootstrap';
+import { FaUser, FaKey } from 'react-icons/fa';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import './Navbar.css';
 
 const CustomNavbar = () => {
   const [showSidebar, setShowSidebar] = useState(false);
@@ -11,29 +15,45 @@ const CustomNavbar = () => {
 
   return (
     <>
-      <Navbar bg="dark" variant="dark" expand="lg" className="custom-navbar">
-        <Container>
-          <Navbar.Brand href="#home">cardmarket</Navbar.Brand>
-          <Navbar.Toggle aria-controls="basic-navbar-nav" onClick={toggleSidebar} className="sidebar-toggle d-lg-none">
-            ☰
-          </Navbar.Toggle>
-          <Navbar.Collapse id="basic-navbar-nav" className="justify-content-end">
-            <Form className="d-none d-lg-flex login-form">
-              <FormControl type="text" placeholder="Username" className="mr-sm-2" />
-              <a href="#forgot" className="forgot-link">FORGOT?</a>
-              <FormControl type="password" placeholder="Password" className="mr-sm-2" />
-              <a href="#forgot" className="forgot-link">FORGOT?</a>
-              <Button variant="outline-info">LOG IN</Button>
-              <Button variant="outline-light" className="ml-2">SIGN UP</Button>
-            </Form>
-            <Button variant="outline-light d-none d-lg-flex" onClick={toggleSidebar} className="sidebar-toggle d-none d-lg-inline-block">
-              ☰
-            </Button>
-          </Navbar.Collapse>
-        </Container>
-      </Navbar>
+      <div className="navbar-container">
+        {/* Logo Section */}
+        <div className="navbar-logo">
+          <img src="logo.png" alt="cardmarket" /> {/* Replace with your logo */}
+          <span>cardmarket</span>
+        </div>
 
-      {/* Sidebar for Mobile and Tablet */}
+        {/* Login Form and Buttons Section */}
+        <div className="nav-center">
+          <div className="input-group">
+            <div className="input-icon"><FaUser /></div>
+            <input type="text" placeholder="Username" className="input-field" />
+            <a href="#forgot" className="forgot-link">FORGOT?</a>
+          </div>
+          
+          <div className="input-group">
+            <div className="input-icon"><FaKey /></div>
+            <input type="password" placeholder="Password" className="input-field" />
+            <a href="#forgot" className="forgot-link">FORGOT?</a>
+          </div>
+          
+          <div className="button-container">
+            <Button variant="outline-info" className="login-button">LOG IN</Button>
+          </div>
+          
+          <div className="button-container">
+            <Button variant="outline-light" className="signup-button">SIGN UP</Button>
+          </div>
+        </div>
+
+        {/* Hamburger Menu Section */}
+        <div className="navbar-toggle">
+          <Button variant="outline-light" onClick={toggleSidebar} className="sidebar-toggle">
+            ☰
+          </Button>
+        </div>
+      </div>
+
+      {/* Sidebar for Mobile */}
       <Offcanvas show={showSidebar} onHide={toggleSidebar} placement="end" className="custom-offcanvas">
         <Offcanvas.Header closeButton>
           <Offcanvas.Title>Menu</Offcanvas.Title>
