@@ -1,4 +1,8 @@
-/* Navbar.css */
+
+ /* Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
+
+/* Layout */
 
 .navbar-container {
   display: flex;
@@ -6,6 +10,7 @@
   justify-content: space-between;
   background-color: #333;
   padding: 0.5rem 1rem;
+  font-family: 'Roboto', sans-serif;
 }
 
 .navbar-logo {
@@ -52,8 +57,8 @@
 
 .forgot-link {
   color: #f1f1f1;
-  font-size: 0.8rem;
-  margin-left: 0.5rem;
+  font-size: 0.7rem;
+  margin-left: -0.7rem;
 }
 
 .button-container {
@@ -63,6 +68,7 @@
 
 .login-button, .signup-button {
   margin: 0;
+  width: 6em;
 }
 
 .navbar-toggle {

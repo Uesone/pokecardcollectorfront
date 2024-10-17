@@ -18,8 +18,8 @@ const CustomNavbar = () => {
       <div className="navbar-container">
         {/* Logo Section */}
         <div className="navbar-logo">
-          <img src="logo.png" alt="cardmarket" /> {/* Replace with your logo */}
-          <span>cardmarket</span>
+          <img src="logo.png" alt="" /> 
+          <span>PokèAlbum</span>
         </div>
 
         {/* Login Form and Buttons Section */}
@@ -27,15 +27,17 @@ const CustomNavbar = () => {
           <div className="input-group">
             <div className="input-icon"><FaUser /></div>
             <input type="text" placeholder="Username" className="input-field" />
-            <a href="#forgot" className="forgot-link">FORGOT?</a>
+            
           </div>
-          
+    
+          <a href="#forgot" className="forgot-link">FORGOT?</a>
+
           <div className="input-group">
             <div className="input-icon"><FaKey /></div>
             <input type="password" placeholder="Password" className="input-field" />
-            <a href="#forgot" className="forgot-link">FORGOT?</a>
           </div>
-          
+          <a href="#forgot" className="forgot-link">FORGOT?</a>
+         
           <div className="button-container">
             <Button variant="outline-info" className="login-button">LOG IN</Button>
           </div>
