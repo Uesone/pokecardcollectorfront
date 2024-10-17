@@ -34,6 +34,7 @@
 }
 
 .input-group {
+  position: relative;
   display: flex;
   align-items: center;
 }
@@ -47,6 +48,7 @@
 }
 
 .input-field {
+  width: 20em; 
   padding: 0.5rem;
   border: none;
   outline: none;
@@ -56,9 +58,18 @@
 }
 
 .forgot-link {
-  color: #f1f1f1;
-  font-size: 0.7rem;
-  margin-left: -0.7rem;
+  position: absolute;
+  right: 10px;
+  color: #8b8b8b;
+  font-size: 0.8rem;
+  text-decoration: none;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.input-field:focus + .forgot-link,
+.input-field:not(:placeholder-shown) + .forgot-link {
+  opacity: 0;
+  transform: translateY(-5px);
 }
 
 .button-container {
@@ -67,8 +78,8 @@
 }
 
 .login-button, .signup-button {
-  margin: 0;
   width: 6em;
+  margin: 0;
 }
 
 .navbar-toggle {

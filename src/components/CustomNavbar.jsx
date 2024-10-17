@@ -5,6 +5,7 @@ import { Offcanvas, Nav, Button } from 'react-bootstrap';
 import { FaUser, FaKey } from 'react-icons/fa';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './Navbar.css';
+import logo from '../assets/img/pokeball.png';
 
 const CustomNavbar = () => {
   const [showSidebar, setShowSidebar] = useState(false);
@@ -18,7 +19,7 @@ const CustomNavbar = () => {
       <div className="navbar-container">
         {/* Logo Section */}
         <div className="navbar-logo">
-          <img src="logo.png" alt="" /> 
+          <img src={logo} alt="logo" /> 
           <span>PokèAlbum</span>
         </div>
 
@@ -27,17 +28,15 @@ const CustomNavbar = () => {
           <div className="input-group">
             <div className="input-icon"><FaUser /></div>
             <input type="text" placeholder="Username" className="input-field" />
-            
+            <a href="/forgot-password" className="forgot-link">FORGOT?</a>
           </div>
-    
-          <a href="#forgot" className="forgot-link">FORGOT?</a>
-
+          
           <div className="input-group">
             <div className="input-icon"><FaKey /></div>
             <input type="password" placeholder="Password" className="input-field" />
+            <a href="/forgot-password" className="forgot-link">FORGOT?</a>
           </div>
-          <a href="#forgot" className="forgot-link">FORGOT?</a>
-         
+          
           <div className="button-container">
             <Button variant="outline-info" className="login-button">LOG IN</Button>
           </div>
