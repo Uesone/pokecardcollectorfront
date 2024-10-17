@@ -1,25 +1,18 @@
-import logo from './logo.svg';
-import './App.css';
+// App.js
 
-function App() {
+import React from "react";
+import CustomNavbar from "./components/CustomNavbar";
+
+const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <CustomNavbar />
+      <div style={{ padding: "20px", color: "#333" }}>
+        <h1>Welcome to Cardmarket</h1>
+        <p>Explore our marketplace for trading card games.</p>
+      </div>
     </div>
   );
-}
+};
 
 export default App;
