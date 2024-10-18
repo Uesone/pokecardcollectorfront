@@ -18,10 +18,13 @@ const SidebarMenu = ({ showSidebar, toggleSidebar, isLoggedIn, role, handleLogou
               <Nav.Link href="#jobs">Jobs</Nav.Link>
             </>
           ) : (
+            // Sidebar dopo il login con Trading Cards e altri link
             <>
-              {role === 'ADMIN' && <Nav.Link href="#admin">Admin Panel</Nav.Link>}
+              <Nav.Link href="#home">Home</Nav.Link>
+              <Nav.Link href="#pokedex">Pokédex</Nav.Link>
+              <Nav.Link href="#trading">Trading Cards</Nav.Link> {/* Nuovo link Trading Cards */}
               <Nav.Link href="#profile">Profile</Nav.Link>
-              <Nav.Link href="#settings">Settings</Nav.Link>
+              <Nav.Link href="#collections">My Collections</Nav.Link>
               <Nav.Link href="#logout" onClick={handleLogout}>Logout</Nav.Link>
             </>
           )}

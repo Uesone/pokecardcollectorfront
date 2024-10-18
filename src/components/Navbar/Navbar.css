@@ -1,127 +1,220 @@
- /* Fonts */
- @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
- @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap'); /* Font stile pixel per i pulsanti */
- 
- /* Layout */
- 
- .navbar-container {
-   display: flex;
-   align-items: center;
-   justify-content: space-between;
-   background-color: #333;
-   padding: 0.5rem 1rem;
-   font-family: 'Roboto', sans-serif;
- }
- 
- .navbar-logo {
-   display: flex;
-   align-items: center;
-   font-size: 1.25rem;
-   color: #f1f1f1;
-   
- }
- 
- .navbar-logo img {
-   width: 30px;
-   height: auto;
-   margin-right: 8px;
- }
- 
- .nav-center {
-   display: flex;
-   align-items: center;
-   justify-content: center;
-   gap: 1rem;
- }
- 
- .input-group {
-   position: relative;
-   display: flex;
-   align-items: center;
- }
- 
- .input-icon {
-   background-color: #444;
-   padding: 0.5rem;
-   color: #f1f1f1;
-   border-top-left-radius: 4px;
-   border-bottom-left-radius: 4px;
- }
- 
- .input-field {
-   width: 20em; 
-   padding: 0.5rem;
-   border: none;
-   outline: none;
-   color: #333;
-   border-top-right-radius: 4px;
-   border-bottom-right-radius: 4px;
- }
- 
- .forgot-link {
-   position: absolute;
-   right: 10px;
-   color: #8b8b8b;
-   font-size: 0.8rem;
-   text-decoration: none;
-   transition: opacity 0.2s ease, transform 0.2s ease;
- }
- 
- .input-field:focus + .forgot-link,
- .input-field:not(:placeholder-shown) + .forgot-link {
-   opacity: 0;
-   transform: translateY(-5px);
- }
- 
- .button-container {
-   display: flex;
-   align-items: center;
- }
- 
- /* Pulsanti stile GameBoy anni '90 */
- .login-button, .signup-button {
-   width: 9em;
-   padding: 0.5rem;
-   background-color: #6A93FF; /* Colore blu chiaro retro */
-   color: #F0F0F0; /* Colore testo bianco per contrasto */
-   font-family: 'Press Start 2P', cursive; /* Font pixelato */
-   border: 3px solid #1A1A1A; /* Bordi neri spessi per effetto retrò */
-   border-radius: 8px; /* Arrotondamento per un look vintage */
-   text-transform: uppercase;
-   cursor: pointer;
-   transition: background-color 0.2s ease, transform 0.1s ease; /* Effetto hover */
- }
- 
- .login-button:hover, .signup-button:hover {
-   background-color: #4A70D0; /* Blu scuro al passaggio del mouse */
- }
- 
- .login-button:active, .signup-button:active {
-   background-color: #1A1A1A; /* Colore più scuro quando premuto */
-   transform: translateY(2px); /* Simulazione del "click" abbassando leggermente il bottone */
- }
- 
- .navbar-toggle {
-   display: flex;
-   justify-content: flex-end;
- }
- 
- /* Responsive Design */
- @media (max-width: 991px) {
-   .nav-center {
-     display: none;
-   }
- }
- 
- /* Sidebar Styling */
- .custom-offcanvas .dark-mode-toggle {
-   display: flex;
-   align-items: center;
-   justify-content: space-between;
-   padding: 0.5rem 1rem;
- }
- 
- .dark-mode-toggle input[type="checkbox"] {
-   margin-left: 0.5rem;
- }
- 
+/* ==================== Fonts ==================== */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap'); /* Font stile pixel per i pulsanti */
+
+/* ==================== Layout Navbar (Generale) ==================== */
+.navbar-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #333;
+  padding: 0.5rem 1rem;
+  font-family: 'Roboto', sans-serif;
+}
+
+.navbar-logo {
+  display: flex;
+  align-items: center;
+  font-size: 1.25rem;
+  color: #f1f1f1;
+}
+
+.navbar-logo img {
+  width: 30px;
+  height: auto;
+  margin-right: 8px;
+}
+
+/* Cambia il font di PokèAlbum a Press Start 2P dopo il login */
+.press-start-font {
+  font-family: 'Press Start 2P', cursive;
+  color: #F0F0F0; /* Puoi anche cambiare colore se necessario */
+}
+
+
+.nav-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5rem; /* Distanza tra i pulsanti prima del login */
+}
+
+.nav-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.nav-button {
+  background: none;
+  border: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: #f1f1f1;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+/* ==================== Icone SVG (Generale) ==================== */
+.navbar-icon {
+  width: 24px;
+  height: 24px;
+  vertical-align: middle;
+  filter: brightness(0) invert(1); /* Cambia il colore dell'icona in bianco */
+}
+
+/* ==================== Modifiche dopo il Login ==================== */
+.navbar-logged-in .nav-center {
+  gap: 9.5rem; /* Aumenta la distanza tra i pulsanti dopo il login */
+}
+
+.navbar-logged-in .nav-button img {
+  width: 36px; /* Dimensione maggiore dell'icona dopo il login */
+  height: 36px;
+  margin-bottom: 0.5rem; /* Spazio tra l'icona e il testo */
+  margin-right: 0; /* Rimuove il margin-right dopo il login */
+}
+
+.navbar-logged-in .nav-button:hover {
+  background-color: #6A93FF; /* Sfondo blu chiaro simile ai pulsanti login/signup */
+  border-radius: 8px; /* Aggiunge un bordo arrotondato */
+}
+
+.navbar-logged-in .nav-button:hover span {
+  font-family: 'Press Start 2P', cursive; /* Cambia il font al font pixelato */
+  color: #F0F0F0; /* Cambia il colore del testo a bianco */
+}
+
+.navbar-logged-in .nav-button:hover img {
+  filter: brightness(0) invert(1); /* Le icone rimangono invariate (bianche) */
+}
+
+.navbar-logged-in .nav-button span {
+  margin-top: 0.0rem;
+  font-size: 0.9rem;
+  margin-right: 2px;
+}
+
+/* ==================== Input Fields (Username e Password) ==================== */
+.input-group {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.input-icon {
+  background-color: #444;
+  padding: 0.5rem;
+  color: #f1f1f1;
+  border-top-left-radius: 4px;
+  border-bottom-left-radius: 4px;
+}
+
+.input-field {
+  width: 20em;
+  padding: 0.5rem;
+  border: none;
+  outline: none;
+  color: #333;
+  border-top-right-radius: 4px;
+  border-bottom-right-radius: 4px;
+}
+
+/* Link "Forgot?" all'interno del campo input */
+.forgot-link {
+  position: absolute;
+  right: 10px;
+  color: #8b8b8b;
+  font-size: 0.8rem;
+  text-decoration: none;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.input-field:focus + .forgot-link,
+.input-field:not(:placeholder-shown) + .forgot-link {
+  opacity: 0;
+  transform: translateY(-5px);
+}
+
+/* ==================== Pulsanti Log In e Sign Up ==================== */
+/* Stile Roboto, sfondo bianco e testo nero prima dell'hover */
+.login-button, .signup-button {
+  width: 9em;
+  padding: 0.5rem;
+  background-color: white; /* Sfondo bianco prima dell'hover */
+  color: black; /* Testo nero */
+  font-family: 'Roboto', sans-serif; /* Font Roboto */
+  border: 2px solid black; /* Bordi neri */
+  border-radius: 8px; /* Arrotondamento */
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.1s ease, font-family 0.2s ease, color 0.2s ease; /* Transizione per tutti i cambiamenti */
+}
+
+/* Stile anni '90 all'hover */
+.login-button:hover, .signup-button:hover {
+  background-color: #6A93FF; /* Colore blu chiaro retro */
+  color: #F0F0F0; /* Testo bianco */
+  font-family: 'Press Start 2P', cursive; /* Font pixelato stile anni '90 */
+  border: 3px solid #1A1A1A; /* Bordi neri spessi durante l'hover */
+  transform: translateY(2px); /* Simulazione del "click" abbassando leggermente il bottone */
+}
+
+.login-button:active, .signup-button:active {
+  background-color: #1A1A1A; /* Colore più scuro quando premuto */
+  transform: translateY(2px); /* Simulazione del "click" abbassando leggermente il bottone */
+}
+
+/* ==================== Sidebar Styling ==================== */
+.custom-offcanvas .dark-mode-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.5rem 1rem;
+}
+
+.dark-mode-toggle input[type="checkbox"] {
+  margin-left: 0.5rem;
+}
+
+/* Icone SVG nella sidebar */
+.sidebar-icon {
+  width: 24px;
+  height: 24px;
+  margin-right: 8px;
+  vertical-align: middle;
+  fill: white; /* Cambia il colore dell'icona in bianco */
+}
+
+/* ==================== Effetto hover per le icone (Prima e dopo il login) ==================== */
+.nav-button:hover img {
+  filter: brightness(0) invert(1); /* Rende le icone bianche al passaggio del mouse */
+}
+
+/* ==================== Responsive Design ==================== */
+@media (max-width: 991px) {
+  .nav-center {
+    display: none;
+  }
+}
+/* Alert */
+
+.alert {
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 5px;
+}
+
+.alert-success {
+  background-color: #d4edda;
+  color: #155724;
+  border: 1px solid #c3e6cb;
+}
+
+.alert-danger {
+  background-color: #f8d7da;
+  color: #721c24;
+  border: 1px solid #f5c6cb;
+}

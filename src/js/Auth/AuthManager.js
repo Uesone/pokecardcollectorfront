@@ -1,4 +1,3 @@
-// AuthManager.js
 import { useEffect } from "react";
 
 const API_BASE_URL = "http://localhost:3001";
@@ -16,26 +15,28 @@ const AuthManager = ({ setIsLoggedIn, setRole }) => {
       })
         .then((response) => {
           if (response.ok) {
-            return response.json();
+            return response.json(); // Dati utente restituiti dal backend
           }
           throw new Error("Errore durante la verifica del token");
         })
         .then((data) => {
-          setIsLoggedIn(true);
-          setRole(data.role);
+          setIsLoggedIn(true); // Mantieni l'utente loggato
+          setRole(data.role); // Imposta il ruolo dell'utente
         })
         .catch((error) => {
           console.error("Errore durante la verifica del token", error);
-          setIsLoggedIn(false);
+          setIsLoggedIn(false); // Imposta lo stato di non autenticato se ci sono errori
         });
+    } else {
+      setIsLoggedIn(false); // Se non c'è token, l'utente è sloggato
     }
   }, [setIsLoggedIn, setRole]);
 
   // Funzione di logout
   const handleLogout = () => {
     localStorage.removeItem("jwtToken"); // Rimuove il token JWT
-    setIsLoggedIn(false);
-    setRole("");
+    setIsLoggedIn(false); // Aggiorna lo stato a sloggato
+    setRole(""); // Resetta il ruolo
   };
 
   return { handleLogout };

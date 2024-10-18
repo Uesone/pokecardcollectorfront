@@ -1,20 +1,24 @@
-// CustomNavbar.js
 import React, { useState } from 'react';
-import { Button } from 'react-bootstrap';
-import { FaUserCircle } from 'react-icons/fa';
+import { Button, Nav } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './Navbar.css';
-import AuthComponent from '../../js/Auth/AuthComponent'; // Importa il componente AuthComponent
-import SidebarMenu from '../../components/Navbar/Sidebar/SidebarMenu'; // Importa il componente SidebarMenu
-import AuthManager from '../../js/Auth/AuthManager'; // Importa il gestore dell'autenticazione
-import logo from '../../asset/pokemon-pokeball-legue-seeklogo.png'
+import AuthComponent from '../../js/Auth/AuthComponent';
+import SidebarMenu from '../../components/Navbar/Sidebar/SidebarMenu';
+import AuthManager from '../../js/Auth/AuthManager';
+import logo from '../../assets/pokemon-pokeball-legue-seeklogo.png';
+
+// Importa le icone SVG
+import homeIcon from '../../assets/icons/home-icon.svg';
+import pokedexIcon from '../../assets/icons/pokedex-icon.svg';
+import tradingCardsIcon from '../../assets/icons/trading-cards-icon.svg';
+import aboutUsIcon from '../../assets/icons/about-us-icon.svg';
 
 const CustomNavbar = () => {
   const [showSidebar, setShowSidebar] = useState(false);
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false); // Stato per il login
   const [role, setRole] = useState(''); // Ruolo dell'utente (USER o ADMIN)
 
-  // Usa il gestore dell'autenticazione
+  // Gestione del logout
   const { handleLogout } = AuthManager({ setIsLoggedIn, setRole });
 
   const toggleSidebar = () => {
@@ -23,21 +27,47 @@ const CustomNavbar = () => {
 
   return (
     <>
-      <div className="navbar-container">
+      <div className={`navbar-container ${isLoggedIn ? 'navbar-logged-in' : ''}`}>
         <div className="navbar-logo">
           <img src={logo} alt="logo" />
-          <span>PokèAlbum</span>
+          {/* Cambia il font di PokèAlbum in Press Start 2P se l'utente è loggato */}
+          <span className={isLoggedIn ? 'press-start-font' : ''}>PokèAlbum</span>
         </div>
 
+        {/* Prima del login */}
         {!isLoggedIn ? (
           <AuthComponent setIsLoggedIn={setIsLoggedIn} setRole={setRole} />
         ) : (
-          <div className="nav-center">
-            <span className="welcome-text">
-              Welcome, {role === 'ADMIN' ? 'Admin' : 'User'}!
-            </span>
-            <FaUserCircle className="user-icon" />
-          </div>
+          // Navbar con i pulsanti divisi in div con icone sopra i testi dopo il login
+          <Nav className="nav-center">
+            <div className="nav-item">
+              <button className="nav-button">
+                <img src={homeIcon} alt="Home" className="navbar-icon" />
+                <span>Home</span>
+              </button>
+            </div>
+
+            <div className="nav-item">
+              <button className="nav-button">
+                <img src={pokedexIcon} alt="Pokedex" className="navbar-icon" />
+                <span>Pokédex</span>
+              </button>
+            </div>
+
+            <div className="nav-item">
+              <button className="nav-button">
+                <img src={tradingCardsIcon} alt="Trading Cards" className="navbar-icon" />
+                <span>Trading Cards</span>
+              </button>
+            </div>
+
+            <div className="nav-item">
+              <button className="nav-button">
+                <img src={aboutUsIcon} alt="About Us" className="navbar-icon" />
+                <span>About Us</span>
+              </button>
+            </div>
+          </Nav>
         )}
 
         <div className="navbar-toggle">
@@ -47,7 +77,7 @@ const CustomNavbar = () => {
         </div>
       </div>
 
-      {/* Usa il componente SidebarMenu */}
+      {/* Sidebar con Home, Pokédex, Trading Cards, Profile, My Collections */}
       <SidebarMenu
         showSidebar={showSidebar}
         toggleSidebar={toggleSidebar}
@@ -59,4 +89,4 @@ const CustomNavbar = () => {
   );
 };
 
-export default CustomNavbar;
+export default CustomNavbar

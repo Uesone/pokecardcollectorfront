@@ -1,11 +1,18 @@
-// AuthComponent.js
 import React, { useState } from "react";
+import SignupModal from "../../components/Modals/ModaleSignUp/SignupModal";
+import MessageModal from "../../components/Modals/ErrorModals/MessageModal"; // Importa il componente per i messaggi
 
-const API_BASE_URL = "http://localhost:3001"; // URL del tuo backend
+const API_BASE_URL = "http://localhost:3001";
 
 const AuthComponent = ({ setIsLoggedIn, setRole }) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [showSignupModal, setShowSignupModal] = useState(false);
+  const [messageModal, setMessageModal] = useState({
+    show: false,
+    message: "",
+    isError: false,
+  });
 
   // Funzione di login
   const handleLogin = async () => {
@@ -24,17 +31,29 @@ const AuthComponent = ({ setIsLoggedIn, setRole }) => {
       if (response.ok) {
         const data = await response.json();
         const { token, role } = data;
-        // Memorizza il token nel localStorage
-        localStorage.setItem("jwtToken", token);
+        localStorage.setItem("jwtToken", token); // Memorizza il token nel localStorage
         setRole(role);
         setIsLoggedIn(true);
       } else {
-        console.error("Errore durante il login");
+        setMessageModal({
+          show: true,
+          message: "Login failed. Please check your credentials.",
+          isError: true,
+        });
       }
     } catch (error) {
-      console.error("Errore durante il login", error);
+      setMessageModal({
+        show: true,
+        message: "An error occurred during login.",
+        isError: true,
+      });
     }
   };
+
+  const handleShowSignupModal = () => setShowSignupModal(true);
+  const handleCloseSignupModal = () => setShowSignupModal(false);
+  const handleCloseMessageModal = () =>
+    setMessageModal({ show: false, message: "", isError: false });
 
   return (
     <div className="nav-center">
@@ -73,8 +92,24 @@ const AuthComponent = ({ setIsLoggedIn, setRole }) => {
       </div>
 
       <div className="button-container">
-        <button className="signup-button">SIGN UP</button>
+        <button className="signup-button" onClick={handleShowSignupModal}>
+          SIGN UP
+        </button>
       </div>
+
+      {/* Modale di Sign Up */}
+      <SignupModal
+        show={showSignupModal}
+        handleClose={handleCloseSignupModal}
+      />
+
+      {/* Modale di messaggio */}
+      <MessageModal
+        show={messageModal.show}
+        handleClose={handleCloseMessageModal}
+        message={messageModal.message}
+        isError={messageModal.isError}
+      />
     </div>
   );
 };

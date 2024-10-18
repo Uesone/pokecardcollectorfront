@@ -1,0 +1,70 @@
+/* ==================== Stile del pulsante Sign Up (Roboto, scritta nera, sfondo bianco) ==================== */
+.signup-button {
+    width: 9em;
+    padding: 0.5rem;
+    background-color: white; /* Sfondo bianco prima dell'hover */
+    color: black; /* Testo nero */
+    font-family: 'Roboto', sans-serif; /* Font Roboto */
+    border: 2px solid black; /* Bordo nero */
+    border-radius: 8px; /* Arrotondamento */
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background-color 0.2s ease, transform 0.1s ease, font-family 0.2s ease, color 0.2s ease; /* Transizione per tutti i cambiamenti */
+}
+
+/* Stile anni '90 all'hover */
+.signup-button:hover {
+    background-color: #6A93FF; /* Colore blu chiaro retrò durante l'hover */
+    color: #F0F0F0; /* Testo bianco durante l'hover */
+    font-family: 'Press Start 2P', cursive; /* Font pixelato durante l'hover */
+    border: 3px solid #1A1A1A; /* Bordi neri spessi durante l'hover */
+    transform: translateY(2px); /* Simulazione del "click" abbassando leggermente il bottone */
+}
+
+/* Stile del pulsante quando viene cliccato */
+.signup-button:active {
+    background-color: #1A1A1A; /* Colore più scuro quando premuto */
+    transform: translateY(2px); /* Simulazione del "click" abbassando leggermente il bottone */
+}
+
+/* ==================== Stile del Modale ==================== */
+.modal-content {
+    background-color: #333; /* Sfondo scuro retrò */
+    color: #f1f1f1;
+    border: 3px solid #1A1A1A; /* Bordo spesso nero */
+    font-family: 'Press Start 2P', cursive; /* Font pixelato */
+    border-radius: 10px;
+}
+
+.modal-header, .modal-footer {
+    border-bottom: none;
+    border-top: none;
+}
+
+.modal-title {
+    font-size: 1.2rem;
+    color: #f1f1f1;
+}
+
+.modal-body {
+    background-color: #444; /* Sfondo per il corpo del modale */
+}
+
+/* ==================== Input Fields con placeholder e testo Roboto ==================== */
+.modal-body .form-control {
+    background-color: #555; /* Sfondo per i campi input */
+    color: #fff; /* Testo bianco */
+    border: 2px solid #1A1A1A; /* Bordo spesso */
+    font-family: 'Roboto', sans-serif; /* Font Roboto per il testo scritto */
+}
+
+.modal-body .form-control::placeholder {
+    color: #bbb; /* Colore del placeholder */
+    font-family: 'Roboto', sans-serif; /* Font Roboto per il placeholder */
+}
+
+.modal-body .form-control:focus {
+    background-color: #666;
+    border-color: #4A70D0; /* Colore di bordo in focus */
+}
+
