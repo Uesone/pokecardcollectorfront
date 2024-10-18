@@ -5,7 +5,7 @@ import { Offcanvas, Nav, Button } from 'react-bootstrap';
 import { FaUser, FaKey } from 'react-icons/fa';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './Navbar.css';
-import logo from '../assets/img/pokeball.png';
+import logo from '../../asset/pokemon-pokeball-legue-seeklogo.png'
 
 const CustomNavbar = () => {
   const [showSidebar, setShowSidebar] = useState(false);

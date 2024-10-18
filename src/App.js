@@ -1,7 +1,5 @@
-// App.js
-
 import React from "react";
-import CustomNavbar from "./components/CustomNavbar";
+import CustomNavbar from "./components/Navbar/CustomNavbar";
 
 const App = () => {
   return (
