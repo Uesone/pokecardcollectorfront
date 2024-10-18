@@ -1,14 +1,21 @@
 // CustomNavbar.js
-
 import React, { useState } from 'react';
-import { Offcanvas, Nav, Button } from 'react-bootstrap';
-import { FaUser, FaKey } from 'react-icons/fa';
+import { Button } from 'react-bootstrap';
+import { FaUserCircle } from 'react-icons/fa';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './Navbar.css';
+import AuthComponent from '../../js/Auth/AuthComponent'; // Importa il componente AuthComponent
+import SidebarMenu from '../../components/Navbar/Sidebar/SidebarMenu'; // Importa il componente SidebarMenu
+import AuthManager from '../../js/Auth/AuthManager'; // Importa il gestore dell'autenticazione
 import logo from '../../asset/pokemon-pokeball-legue-seeklogo.png'
 
 const CustomNavbar = () => {
   const [showSidebar, setShowSidebar] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [role, setRole] = useState(''); // Ruolo dell'utente (USER o ADMIN)
+
+  // Usa il gestore dell'autenticazione
+  const { handleLogout } = AuthManager({ setIsLoggedIn, setRole });
 
   const toggleSidebar = () => {
     setShowSidebar(!showSidebar);
@@ -17,36 +24,22 @@ const CustomNavbar = () => {
   return (
     <>
       <div className="navbar-container">
-        {/* Logo Section */}
         <div className="navbar-logo">
-          <img src={logo} alt="logo" /> 
+          <img src={logo} alt="logo" />
           <span>PokèAlbum</span>
         </div>
 
-        {/* Login Form and Buttons Section */}
-        <div className="nav-center">
-          <div className="input-group">
-            <div className="input-icon"><FaUser /></div>
-            <input type="text" placeholder="Username" className="input-field" />
-            <a href="/forgot-password" className="forgot-link">FORGOT?</a>
+        {!isLoggedIn ? (
+          <AuthComponent setIsLoggedIn={setIsLoggedIn} setRole={setRole} />
+        ) : (
+          <div className="nav-center">
+            <span className="welcome-text">
+              Welcome, {role === 'ADMIN' ? 'Admin' : 'User'}!
+            </span>
+            <FaUserCircle className="user-icon" />
           </div>
-          
-          <div className="input-group">
-            <div className="input-icon"><FaKey /></div>
-            <input type="password" placeholder="Password" className="input-field" />
-            <a href="/forgot-password" className="forgot-link">FORGOT?</a>
-          </div>
-          
-          <div className="button-container">
-            <Button variant="outline-info" className="login-button">LOG IN</Button>
-          </div>
-          
-          <div className="button-container">
-            <Button variant="outline-light" className="signup-button">SIGN UP</Button>
-          </div>
-        </div>
+        )}
 
-        {/* Hamburger Menu Section */}
         <div className="navbar-toggle">
           <Button variant="outline-light" onClick={toggleSidebar} className="sidebar-toggle">
             ☰
@@ -54,25 +47,14 @@ const CustomNavbar = () => {
         </div>
       </div>
 
-      {/* Sidebar for Mobile */}
-      <Offcanvas show={showSidebar} onHide={toggleSidebar} placement="end" className="custom-offcanvas">
-        <Offcanvas.Header closeButton>
-          <Offcanvas.Title>Menu</Offcanvas.Title>
-        </Offcanvas.Header>
-        <Offcanvas.Body>
-          <Nav className="flex-column">
-            <Nav.Link href="#policies">Policies</Nav.Link>
-            <Nav.Link href="#about">About Us</Nav.Link>
-            <Nav.Link href="#help">Help</Nav.Link>
-            <Nav.Link href="#jobs">Jobs</Nav.Link>
-            <div className="dark-mode-toggle">
-              <span>Dark Mode</span>
-              <input type="checkbox" checked readOnly />
-            </div>
-            <Nav.Link href="#language">English ▼</Nav.Link>
-          </Nav>
-        </Offcanvas.Body>
-      </Offcanvas>
+      {/* Usa il componente SidebarMenu */}
+      <SidebarMenu
+        showSidebar={showSidebar}
+        toggleSidebar={toggleSidebar}
+        isLoggedIn={isLoggedIn}
+        role={role}
+        handleLogout={handleLogout}
+      />
     </>
   );
 };

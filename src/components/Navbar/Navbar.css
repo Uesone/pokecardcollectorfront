@@ -1,107 +1,127 @@
-
  /* Fonts */
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
-
-/* Layout */
-
-.navbar-container {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  background-color: #333;
-  padding: 0.5rem 1rem;
-  font-family: 'Roboto', sans-serif;
-}
-
-.navbar-logo {
-  display: flex;
-  align-items: center;
-  font-size: 1.25rem;
-  color: #f1f1f1;
-}
-
-.navbar-logo img {
-  width: 30px;
-  height: auto;
-  margin-right: 8px;
-}
-
-.nav-center {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 1rem;
-}
-
-.input-group {
-  position: relative;
-  display: flex;
-  align-items: center;
-}
-
-.input-icon {
-  background-color: #444;
-  padding: 0.5rem;
-  color: #f1f1f1;
-  border-top-left-radius: 4px;
-  border-bottom-left-radius: 4px;
-}
-
-.input-field {
-  width: 20em; 
-  padding: 0.5rem;
-  border: none;
-  outline: none;
-  color: #333;
-  border-top-right-radius: 4px;
-  border-bottom-right-radius: 4px;
-}
-
-.forgot-link {
-  position: absolute;
-  right: 10px;
-  color: #8b8b8b;
-  font-size: 0.8rem;
-  text-decoration: none;
-  transition: opacity 0.2s ease, transform 0.2s ease;
-}
-
-.input-field:focus + .forgot-link,
-.input-field:not(:placeholder-shown) + .forgot-link {
-  opacity: 0;
-  transform: translateY(-5px);
-}
-
-.button-container {
-  display: flex;
-  align-items: center;
-}
-
-.login-button, .signup-button {
-  width: 6em;
-  margin: 0;
-}
-
-.navbar-toggle {
-  display: flex;
-  justify-content: flex-end;
-}
-
-/* Responsive Design */
-@media (max-width: 991px) {
-  .nav-center {
-    display: none;
-  }
-}
-
-/* Sidebar Styling */
-.custom-offcanvas .dark-mode-toggle {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0.5rem 1rem;
-}
-
-.dark-mode-toggle input[type="checkbox"] {
-  margin-left: 0.5rem;
-}
+ @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
+ @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap'); /* Font stile pixel per i pulsanti */
+ 
+ /* Layout */
+ 
+ .navbar-container {
+   display: flex;
+   align-items: center;
+   justify-content: space-between;
+   background-color: #333;
+   padding: 0.5rem 1rem;
+   font-family: 'Roboto', sans-serif;
+ }
+ 
+ .navbar-logo {
+   display: flex;
+   align-items: center;
+   font-size: 1.25rem;
+   color: #f1f1f1;
+   
+ }
+ 
+ .navbar-logo img {
+   width: 30px;
+   height: auto;
+   margin-right: 8px;
+ }
+ 
+ .nav-center {
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   gap: 1rem;
+ }
+ 
+ .input-group {
+   position: relative;
+   display: flex;
+   align-items: center;
+ }
+ 
+ .input-icon {
+   background-color: #444;
+   padding: 0.5rem;
+   color: #f1f1f1;
+   border-top-left-radius: 4px;
+   border-bottom-left-radius: 4px;
+ }
+ 
+ .input-field {
+   width: 20em; 
+   padding: 0.5rem;
+   border: none;
+   outline: none;
+   color: #333;
+   border-top-right-radius: 4px;
+   border-bottom-right-radius: 4px;
+ }
+ 
+ .forgot-link {
+   position: absolute;
+   right: 10px;
+   color: #8b8b8b;
+   font-size: 0.8rem;
+   text-decoration: none;
+   transition: opacity 0.2s ease, transform 0.2s ease;
+ }
+ 
+ .input-field:focus + .forgot-link,
+ .input-field:not(:placeholder-shown) + .forgot-link {
+   opacity: 0;
+   transform: translateY(-5px);
+ }
+ 
+ .button-container {
+   display: flex;
+   align-items: center;
+ }
+ 
+ /* Pulsanti stile GameBoy anni '90 */
+ .login-button, .signup-button {
+   width: 9em;
+   padding: 0.5rem;
+   background-color: #6A93FF; /* Colore blu chiaro retro */
+   color: #F0F0F0; /* Colore testo bianco per contrasto */
+   font-family: 'Press Start 2P', cursive; /* Font pixelato */
+   border: 3px solid #1A1A1A; /* Bordi neri spessi per effetto retrò */
+   border-radius: 8px; /* Arrotondamento per un look vintage */
+   text-transform: uppercase;
+   cursor: pointer;
+   transition: background-color 0.2s ease, transform 0.1s ease; /* Effetto hover */
+ }
+ 
+ .login-button:hover, .signup-button:hover {
+   background-color: #4A70D0; /* Blu scuro al passaggio del mouse */
+ }
+ 
+ .login-button:active, .signup-button:active {
+   background-color: #1A1A1A; /* Colore più scuro quando premuto */
+   transform: translateY(2px); /* Simulazione del "click" abbassando leggermente il bottone */
+ }
+ 
+ .navbar-toggle {
+   display: flex;
+   justify-content: flex-end;
+ }
+ 
+ /* Responsive Design */
+ @media (max-width: 991px) {
+   .nav-center {
+     display: none;
+   }
+ }
+ 
+ /* Sidebar Styling */
+ .custom-offcanvas .dark-mode-toggle {
+   display: flex;
+   align-items: center;
+   justify-content: space-between;
+   padding: 0.5rem 1rem;
+ }
+ 
+ .dark-mode-toggle input[type="checkbox"] {
+   margin-left: 0.5rem;
+ }
+ 
