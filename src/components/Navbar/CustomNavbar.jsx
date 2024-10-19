@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Button, Nav } from 'react-bootstrap';
+import { Link } from 'react-router-dom'; // Usa Link per la navigazione
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './Navbar.css';
 import AuthComponent from '../../js/Auth/AuthComponent';
@@ -41,31 +42,31 @@ const CustomNavbar = () => {
           // Navbar con i pulsanti divisi in div con icone sopra i testi dopo il login
           <Nav className="nav-center">
             <div className="nav-item">
-              <button className="nav-button">
+              <Link to="/" className="nav-button">
                 <img src={homeIcon} alt="Home" className="navbar-icon" />
                 <span>Home</span>
-              </button>
+              </Link>
             </div>
 
             <div className="nav-item">
-              <button className="nav-button">
+              <Link to="/pokedex" className="nav-button">
                 <img src={pokedexIcon} alt="Pokedex" className="navbar-icon" />
                 <span>Pokédex</span>
-              </button>
+              </Link>
             </div>
 
             <div className="nav-item">
-              <button className="nav-button">
+              <Link to="/trading-cards" className="nav-button">
                 <img src={tradingCardsIcon} alt="Trading Cards" className="navbar-icon" />
                 <span>Trading Cards</span>
-              </button>
+              </Link>
             </div>
 
             <div className="nav-item">
-              <button className="nav-button">
+              <Link to="/about-us" className="nav-button">
                 <img src={aboutUsIcon} alt="About Us" className="navbar-icon" />
                 <span>About Us</span>
-              </button>
+              </Link>
             </div>
           </Nav>
         )}
@@ -89,4 +90,4 @@ const CustomNavbar = () => {
   );
 };
 
-export default CustomNavbar
+export default CustomNavbar;
