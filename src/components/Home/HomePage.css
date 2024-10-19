@@ -1,0 +1,20 @@
+.homepage {
+    background-color: #f0f8ff; /* Azzurro chiaro */
+    height: 100vh; /* Riempi l'intera altezza della pagina */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+  }
+  
+  .homepage h1 {
+    font-size: 3rem;
+    color: #ff6347; /* Arancione vivace */
+  }
+  
+  .homepage p {
+    font-size: 1.5rem;
+    color: #333;
+  }
+  
