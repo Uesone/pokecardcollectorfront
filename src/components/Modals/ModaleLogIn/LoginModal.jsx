@@ -23,6 +23,15 @@ const LoginModal = ({ show, handleClose, setIsLoggedIn, setRole }) => {
   const handleLogin = async (e) => {
     e.preventDefault();
 
+    if (!formData.email || !formData.password) {
+      setMessageModal({
+        show: true,
+        message: "Please fill in both email and password.",
+        isError: true,
+      });
+      return;
+    }
+
     try {
       const response = await fetch(`${API_BASE_URL}/auth/login`, {
         method: "POST",
@@ -38,10 +47,23 @@ const LoginModal = ({ show, handleClose, setIsLoggedIn, setRole }) => {
       if (response.ok) {
         const data = await response.json();
         const { token, role } = data;
-        localStorage.setItem("jwtToken", token); // Memorizza il token nel localStorage
+
+        if (!token) {
+          setMessageModal({
+            show: true,
+            message: "Token is missing from response.",
+            isError: true,
+          });
+          return;
+        }
+
+        localStorage.setItem("jwtToken", token);
         setRole(role);
         setIsLoggedIn(true);
-        handleClose(); // Chiudi il modale dopo il login
+
+        setTimeout(() => {
+          handleClose(); // Chiudi il modale dopo il login
+        }, 100);
       } else {
         setMessageModal({
           show: true,
@@ -100,7 +122,6 @@ const LoginModal = ({ show, handleClose, setIsLoggedIn, setRole }) => {
         </Modal.Body>
       </Modal>
 
-      {/* Modale di messaggio */}
       <MessageModal
         show={messageModal.show}
         handleClose={handleCloseMessageModal}

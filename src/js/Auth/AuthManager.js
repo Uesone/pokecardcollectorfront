@@ -6,7 +6,6 @@ const AuthManager = ({ setIsLoggedIn, setRole }) => {
   useEffect(() => {
     const token = localStorage.getItem("jwtToken");
     if (token) {
-      // Verifica il token con il backend
       fetch(`${API_BASE_URL}/auth/me`, {
         method: "GET",
         headers: {
@@ -15,28 +14,27 @@ const AuthManager = ({ setIsLoggedIn, setRole }) => {
       })
         .then((response) => {
           if (response.ok) {
-            return response.json(); // Dati utente restituiti dal backend
+            return response.json();
           }
           throw new Error("Errore durante la verifica del token");
         })
         .then((data) => {
-          setIsLoggedIn(true); // Mantieni l'utente loggato
-          setRole(data.role); // Imposta il ruolo dell'utente
+          setIsLoggedIn(true);
+          setRole(data.role);
         })
         .catch((error) => {
           console.error("Errore durante la verifica del token", error);
-          setIsLoggedIn(false); // Imposta lo stato di non autenticato se ci sono errori
+          setIsLoggedIn(false);
         });
     } else {
-      setIsLoggedIn(false); // Se non c'è token, l'utente è sloggato
+      setIsLoggedIn(false);
     }
   }, [setIsLoggedIn, setRole]);
 
-  // Funzione di logout
   const handleLogout = () => {
-    localStorage.removeItem("jwtToken"); // Rimuove il token JWT
-    setIsLoggedIn(false); // Aggiorna lo stato a sloggato
-    setRole(""); // Resetta il ruolo
+    localStorage.removeItem("jwtToken");
+    setIsLoggedIn(false);
+    setRole("");
   };
 
   return { handleLogout };
