@@ -6,7 +6,7 @@ const AuthManager = ({ setIsLoggedIn, setRole }) => {
   useEffect(() => {
     const token = localStorage.getItem("jwtToken");
     if (token) {
-      fetch(`${API_BASE_URL}/auth/me`, {
+      fetch(`${API_BASE_URL}/api/auth/me`, {
         method: "GET",
         headers: {
           Authorization: `Bearer ${token}`,

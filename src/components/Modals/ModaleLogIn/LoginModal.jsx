@@ -6,7 +6,7 @@ import MessageModal from "../../Modals/ErrorModals/MessageModal";
 const API_BASE_URL = "http://localhost:3001";
 
 const LoginModal = ({ show, handleClose, setIsLoggedIn, setRole }) => {
-  const [formData, setFormData] = useState({ email: "", password: "" });
+  const [formData, setFormData] = useState({ username: "", password: "" });
   const [messageModal, setMessageModal] = useState({
     show: false,
     message: "",
@@ -23,23 +23,23 @@ const LoginModal = ({ show, handleClose, setIsLoggedIn, setRole }) => {
   const handleLogin = async (e) => {
     e.preventDefault();
 
-    if (!formData.email || !formData.password) {
+    if (!formData.username || !formData.password) {
       setMessageModal({
         show: true,
-        message: "Please fill in both email and password.",
+        message: "Please fill in both username and password.",
         isError: true,
       });
       return;
     }
 
     try {
-      const response = await fetch(`${API_BASE_URL}/auth/login`, {
+      const response = await fetch(`${API_BASE_URL}/api/auth/login`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          email: formData.email,
+          username: formData.username, // Usa il campo username
           password: formData.password,
         }),
       });
@@ -91,13 +91,13 @@ const LoginModal = ({ show, handleClose, setIsLoggedIn, setRole }) => {
         </Modal.Header>
         <Modal.Body>
           <Form onSubmit={handleLogin}>
-            <Form.Group className="mb-3" controlId="formEmail">
-              <Form.Label>Email</Form.Label>
+            <Form.Group className="mb-3" controlId="formUsername">
+              <Form.Label>Username</Form.Label>
               <Form.Control
-                type="email"
-                placeholder="Enter email"
-                name="email"
-                value={formData.email}
+                type="text"
+                placeholder="Enter username"
+                name="username"
+                value={formData.username}
                 onChange={handleChange}
                 required
               />
