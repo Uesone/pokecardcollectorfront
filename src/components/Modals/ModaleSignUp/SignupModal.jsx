@@ -2,13 +2,23 @@ import React, { useState } from 'react';
 import { Button, Modal, Form } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../../Modals/ModaleSignUp/SignupModal.css';
-import MessageModal from '../../Modals/ErrorModals/MessageModal'; // Importa il componente per i messaggi
+import MessageModal from '../../Modals/ErrorModals/MessageModal';
 
 const API_BASE_URL = "http://localhost:3001";
 
 const SignupModal = ({ show, handleClose }) => {
-  const [formData, setFormData] = useState({ email: '', password: '', confirmPassword: '' });
-  const [messageModal, setMessageModal] = useState({ show: false, message: '', isError: false });
+  const [formData, setFormData] = useState({
+    username: '',
+    email: '',
+    password: '',
+    confirmPassword: ''
+  });
+  const [messageModal, setMessageModal] = useState({
+    show: false,
+    message: '',
+    isError: false
+  });
+
   const handleChange = (e) => {
     setFormData({
       ...formData,
@@ -20,29 +30,53 @@ const SignupModal = ({ show, handleClose }) => {
     e.preventDefault();
 
     if (formData.password !== formData.confirmPassword) {
-      setMessageModal({ show: true, message: 'Passwords do not match.', isError: true });
+      setMessageModal({
+        show: true,
+        message: 'Passwords do not match.',
+        isError: true
+      });
       return;
     }
 
     try {
-      const response = await fetch(`${API_BASE_URL}/auth/register`, {
+      const response = await fetch(`${API_BASE_URL}/api/auth/register`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email: formData.email, password: formData.password }),
+        body: JSON.stringify({
+          username: formData.username,
+          email: formData.email,
+          password: formData.password
+        }),
       });
 
       if (response.ok) {
-        setMessageModal({ show: true, message: 'Registration successful!', isError: false });
+        setMessageModal({
+          show: true,
+          message: 'Registration successful!',
+          isError: false
+        });
         handleClose();
       } else {
-        setMessageModal({ show: true, message: 'Registration failed. Try again.', isError: true });
+        setMessageModal({
+          show: true,
+          message: 'Registration failed. Try again.',
+          isError: true
+        });
       }
     } catch (error) {
-      setMessageModal({ show: true, message: 'An error occurred during registration.', isError: true });
+      setMessageModal({
+        show: true,
+        message: 'An error occurred during registration.',
+        isError: true
+      });
     }
   };
 
-  const handleCloseMessageModal = () => setMessageModal({ show: false, message: '', isError: false });
+  const handleCloseMessageModal = () => setMessageModal({
+    show: false,
+    message: '',
+    isError: false
+  });
 
   return (
     <>
@@ -52,6 +86,18 @@ const SignupModal = ({ show, handleClose }) => {
         </Modal.Header>
         <Modal.Body>
           <Form onSubmit={handleSubmit}>
+            <Form.Group className="mb-3" controlId="formUsername">
+              <Form.Label>Username</Form.Label>
+              <Form.Control
+                type="text"
+                placeholder="Enter username"
+                name="username"
+                value={formData.username}
+                onChange={handleChange}
+                required
+              />
+            </Form.Group>
+
             <Form.Group className="mb-3" controlId="formEmail">
               <Form.Label>Email</Form.Label>
               <Form.Control

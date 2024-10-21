@@ -12,6 +12,32 @@
   font-family: 'Roboto', sans-serif;
 }
 
+/* Div contenitore per i pulsanti LOG IN e SIGN UP */
+.nav-right {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 2rem; /* Aggiunge più spazio tra il menu hamburger e i pulsanti */
+}
+
+/* Div per i pulsanti LOG IN e SIGN UP */
+.auth-buttons {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem; /* Spazio tra i pulsanti di autenticazione */
+}
+
+.nav-right .login-button,
+.nav-right .signup-button {
+  margin-left: 1rem;
+}
+
+/* Cambia il font di PokèAlbum a Press Start 2P dopo il login */
+.press-start-font {
+  font-family: 'Press Start 2P', cursive;
+  color: #F0F0F0;
+}
+
 .navbar-logo {
   display: flex;
   align-items: center;
@@ -25,18 +51,13 @@
   margin-right: 8px;
 }
 
-/* Cambia il font di PokèAlbum a Press Start 2P dopo il login */
-.press-start-font {
-  font-family: 'Press Start 2P', cursive;
-  color: #F0F0F0; /* Puoi anche cambiare colore se necessario */
-}
-
-
+/* ==================== NavCenter ==================== */
 .nav-center {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 1.5rem; /* Distanza tra i pulsanti prima del login */
+  gap: 1.5rem;
+  flex-grow: 1;
 }
 
 .nav-item {
@@ -62,33 +83,34 @@
   width: 24px;
   height: 24px;
   vertical-align: middle;
-  filter: brightness(0) invert(1); /* Cambia il colore dell'icona in bianco */
+  filter: brightness(0) invert(1);
 }
 
 /* ==================== Modifiche dopo il Login ==================== */
 .navbar-logged-in .nav-center {
   gap: 9.5rem; /* Aumenta la distanza tra i pulsanti dopo il login */
+  justify-content: center; /* Centra i pulsanti */
 }
 
 .navbar-logged-in .nav-button img {
   width: 36px; /* Dimensione maggiore dell'icona dopo il login */
   height: 36px;
-  margin-bottom: 0.5rem; /* Spazio tra l'icona e il testo */
-  margin-right: 0; /* Rimuove il margin-right dopo il login */
+  margin-bottom: 0.5rem;
+  margin-right: 0;
 }
 
 .navbar-logged-in .nav-button:hover {
-  background-color: #6A93FF; /* Sfondo blu chiaro simile ai pulsanti login/signup */
-  border-radius: 8px; /* Aggiunge un bordo arrotondato */
+  background-color: #6A93FF;
+  border-radius: 8px;
 }
 
 .navbar-logged-in .nav-button:hover span {
-  font-family: 'Press Start 2P', cursive; /* Cambia il font al font pixelato */
-  color: #F0F0F0; /* Cambia il colore del testo a bianco */
+  font-family: 'Press Start 2P', cursive;
+  color: #F0F0F0;
 }
 
 .navbar-logged-in .nav-button:hover img {
-  filter: brightness(0) invert(1); /* Le icone rimangono invariate (bianche) */
+  filter: brightness(0) invert(1);
 }
 
 .navbar-logged-in .nav-button span {
@@ -97,74 +119,36 @@
   margin-right: 2px;
 }
 
-/* ==================== Input Fields (Username e Password) ==================== */
-.input-group {
-  position: relative;
-  display: flex;
-  align-items: center;
-}
-
-.input-icon {
-  background-color: #444;
-  padding: 0.5rem;
-  color: #f1f1f1;
-  border-top-left-radius: 4px;
-  border-bottom-left-radius: 4px;
-}
-
-.input-field {
-  width: 20em;
-  padding: 0.5rem;
-  border: none;
-  outline: none;
-  color: #333;
-  border-top-right-radius: 4px;
-  border-bottom-right-radius: 4px;
-}
-
-/* Link "Forgot?" all'interno del campo input */
-.forgot-link {
-  position: absolute;
-  right: 10px;
-  color: #8b8b8b;
-  font-size: 0.8rem;
-  text-decoration: none;
-  transition: opacity 0.2s ease, transform 0.2s ease;
-}
-
-.input-field:focus + .forgot-link,
-.input-field:not(:placeholder-shown) + .forgot-link {
-  opacity: 0;
-  transform: translateY(-5px);
-}
-
 /* ==================== Pulsanti Log In e Sign Up ==================== */
-/* Stile Roboto, sfondo bianco e testo nero prima dell'hover */
 .login-button, .signup-button {
   width: 9em;
   padding: 0.5rem;
-  background-color: white; /* Sfondo bianco prima dell'hover */
-  color: black; /* Testo nero */
-  font-family: 'Roboto', sans-serif; /* Font Roboto */
-  border: 2px solid black; /* Bordi neri */
-  border-radius: 8px; /* Arrotondamento */
+  background-color: white;
+  color: black;
+  font-family: 'Roboto', sans-serif;
+  border: 2px solid black;
+  border-radius: 8px;
   text-transform: uppercase;
   cursor: pointer;
-  transition: background-color 0.2s ease, transform 0.1s ease, font-family 0.2s ease, color 0.2s ease; /* Transizione per tutti i cambiamenti */
+  transition: background-color 0.2s ease, transform 0.1s ease, font-family 0.2s ease, color 0.2s ease;
 }
 
-/* Stile anni '90 all'hover */
 .login-button:hover, .signup-button:hover {
-  background-color: #6A93FF; /* Colore blu chiaro retro */
-  color: #F0F0F0; /* Testo bianco */
-  font-family: 'Press Start 2P', cursive; /* Font pixelato stile anni '90 */
-  border: 3px solid #1A1A1A; /* Bordi neri spessi durante l'hover */
-  transform: translateY(2px); /* Simulazione del "click" abbassando leggermente il bottone */
+  background-color: #6A93FF;
+  color: #F0F0F0;
+  font-family: 'Press Start 2P', cursive;
+  border: 3px solid #1A1A1A;
+  transform: translateY(2px);
 }
 
 .login-button:active, .signup-button:active {
-  background-color: #1A1A1A; /* Colore più scuro quando premuto */
-  transform: translateY(2px); /* Simulazione del "click" abbassando leggermente il bottone */
+  background-color: #1A1A1A;
+  transform: translateY(2px);
+}
+
+/* ==================== Effetto hover per le icone (Prima e dopo il login) ==================== */
+.nav-button:hover img {
+  filter: brightness(0) invert(1);
 }
 
 /* ==================== Sidebar Styling ==================== */
@@ -179,28 +163,31 @@
   margin-left: 0.5rem;
 }
 
-/* Icone SVG nella sidebar */
 .sidebar-icon {
   width: 24px;
   height: 24px;
   margin-right: 8px;
   vertical-align: middle;
-  fill: white; /* Cambia il colore dell'icona in bianco */
-}
-
-/* ==================== Effetto hover per le icone (Prima e dopo il login) ==================== */
-.nav-button:hover img {
-  filter: brightness(0) invert(1); /* Rende le icone bianche al passaggio del mouse */
+  fill: white;
 }
 
 /* ==================== Responsive Design ==================== */
 @media (max-width: 991px) {
+  .auth-buttons {
+    display: none;
+  }
   .nav-center {
     display: none;
   }
 }
-/* Alert */
 
+@media (max-width: 768px) {
+  .auth-buttons {
+    display: none;
+  }
+}
+
+/* ==================== Alert ==================== */
 .alert {
   padding: 10px;
   margin-bottom: 10px;

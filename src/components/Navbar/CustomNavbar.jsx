@@ -1,12 +1,14 @@
 import React, { useState } from 'react';
 import { Button, Nav } from 'react-bootstrap';
-import { Link } from 'react-router-dom'; // Usa Link per la navigazione
+import { Link } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import './Navbar.css';
-import AuthComponent from '../../js/Auth/AuthComponent';
+import '../Navbar/Navbar.css';
 import SidebarMenu from '../../components/Navbar/Sidebar/SidebarMenu';
 import AuthManager from '../../js/Auth/AuthManager';
 import logo from '../../assets/pokemon-pokeball-legue-seeklogo.png';
+
+import LoginModal from '../../components/Modals/ModaleLogIn/LoginModal';
+import SignupModal from '../../components/Modals/ModaleSignUp/SignupModal';
 
 // Importa le icone SVG
 import homeIcon from '../../assets/icons/home-icon.svg';
@@ -16,10 +18,11 @@ import aboutUsIcon from '../../assets/icons/about-us-icon.svg';
 
 const CustomNavbar = () => {
   const [showSidebar, setShowSidebar] = useState(false);
-  const [isLoggedIn, setIsLoggedIn] = useState(false); // Stato per il login
-  const [role, setRole] = useState(''); // Ruolo dell'utente (USER o ADMIN)
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [role, setRole] = useState('');
+  const [showLoginModal, setShowLoginModal] = useState(false);
+  const [showSignupModal, setShowSignupModal] = useState(false);
 
-  // Gestione del logout
   const { handleLogout } = AuthManager({ setIsLoggedIn, setRole });
 
   const toggleSidebar = () => {
@@ -31,60 +34,80 @@ const CustomNavbar = () => {
       <div className={`navbar-container ${isLoggedIn ? 'navbar-logged-in' : ''}`}>
         <div className="navbar-logo">
           <img src={logo} alt="logo" />
-          {/* Cambia il font di PokèAlbum in Press Start 2P se l'utente è loggato */}
           <span className={isLoggedIn ? 'press-start-font' : ''}>PokèAlbum</span>
         </div>
 
         {/* Prima del login */}
         {!isLoggedIn ? (
-          <AuthComponent setIsLoggedIn={setIsLoggedIn} setRole={setRole} />
+          <div className="nav-right">
+            <div className="auth-buttons">
+              <button className="login-button" onClick={() => setShowLoginModal(true)}>LOG IN</button>
+              <button className="signup-button" onClick={() => setShowSignupModal(true)}>SIGN UP</button>
+            </div>
+            <Button variant="outline-light" onClick={toggleSidebar} className="sidebar-toggle">
+              ☰
+            </Button>
+          </div>
         ) : (
-          // Navbar con i pulsanti divisi in div con icone sopra i testi dopo il login
-          <Nav className="nav-center">
-            <div className="nav-item">
-              <Link to="/" className="nav-button">
-                <img src={homeIcon} alt="Home" className="navbar-icon" />
-                <span>Home</span>
-              </Link>
-            </div>
+          // Dopo il login: Mostra i pulsanti di navigazione centrati
+          <div className="nav-center">
+            <Nav className="nav-center">
+              <div className="nav-item">
+                <Link to="/" className="nav-button">
+                  <img src={homeIcon} alt="Home" className="navbar-icon" />
+                  <span>Home</span>
+                </Link>
+              </div>
 
-            <div className="nav-item">
-              <Link to="/pokedex" className="nav-button">
-                <img src={pokedexIcon} alt="Pokedex" className="navbar-icon" />
-                <span>Pokédex</span>
-              </Link>
-            </div>
+              <div className="nav-item">
+                <Link to="/pokedex" className="nav-button">
+                  <img src={pokedexIcon} alt="Pokedex" className="navbar-icon" />
+                  <span>Pokédex</span>
+                </Link>
+              </div>
 
-            <div className="nav-item">
-              <Link to="/trading-cards" className="nav-button">
-                <img src={tradingCardsIcon} alt="Trading Cards" className="navbar-icon" />
-                <span>Trading Cards</span>
-              </Link>
-            </div>
+              <div className="nav-item">
+                <Link to="/trading-cards" className="nav-button">
+                  <img src={tradingCardsIcon} alt="Trading Cards" className="navbar-icon" />
+                  <span>Trading Cards</span>
+                </Link>
+              </div>
 
-            <div className="nav-item">
-              <Link to="/about-us" className="nav-button">
-                <img src={aboutUsIcon} alt="About Us" className="navbar-icon" />
-                <span>About Us</span>
-              </Link>
-            </div>
-          </Nav>
+              <div className="nav-item">
+                <Link to="/about-us" className="nav-button">
+                  <img src={aboutUsIcon} alt="About Us" className="navbar-icon" />
+                  <span>About Us</span>
+                </Link>
+              </div>
+            </Nav>
+            <Button variant="outline-light" onClick={toggleSidebar} className="sidebar-toggle">
+              ☰
+            </Button>
+          </div>
         )}
-
-        <div className="navbar-toggle">
-          <Button variant="outline-light" onClick={toggleSidebar} className="sidebar-toggle">
-            ☰
-          </Button>
-        </div>
       </div>
 
-      {/* Sidebar con Home, Pokédex, Trading Cards, Profile, My Collections */}
+      {/* Sidebar */}
       <SidebarMenu
         showSidebar={showSidebar}
         toggleSidebar={toggleSidebar}
         isLoggedIn={isLoggedIn}
         role={role}
         handleLogout={handleLogout}
+      />
+
+      {/* Modale di Login */}
+      <LoginModal
+        show={showLoginModal}
+        handleClose={() => setShowLoginModal(false)}
+        setIsLoggedIn={setIsLoggedIn}
+        setRole={setRole}
+      />
+
+      {/* Modale di Signup */}
+      <SignupModal
+        show={showSignupModal}
+        handleClose={() => setShowSignupModal(false)}
       />
     </>
   );

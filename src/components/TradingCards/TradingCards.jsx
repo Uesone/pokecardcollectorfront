@@ -1,43 +1,36 @@
-import React, { useState } from 'react';
-import { Button, Form, Card, Col, Row } from 'react-bootstrap';
-import axios from 'axios';
+import React, { useState } from "react";
+import { Button, Form, Card, Col, Row } from "react-bootstrap";
+import axios from "axios";
 
 const PokemonSearch = ({ collections, onAddCard }) => {
-  const [query, setQuery] = useState(''); // Per memorizzare la query di ricerca
-  const [cards, setCards] = useState([]); // Per memorizzare i risultati delle carte
-  const [selectedCard, setSelectedCard] = useState(null); // Per memorizzare la carta selezionata
-  const [selectedCollection, setSelectedCollection] = useState(''); // Collezione selezionata per aggiungere la carta
+  const [query, setQuery] = useState("");
+  const [cards, setCards] = useState([]);
+  const [selectedCard, setSelectedCard] = useState(null);
+  const [selectedCollection, setSelectedCollection] = useState("");
 
-  // Funzione per cercare le carte
   const searchCards = async () => {
     try {
       const response = await axios.get(`/api/pokemon/search?query=${query}`);
-      setCards(response.data); // Salva i risultati delle carte
+      setCards(response.data);
     } catch (error) {
-      console.error('Errore nella ricerca delle carte:', error);
+      console.error("Errore nella ricerca delle carte:", error);
     }
   };
 
-  // Funzione per gestire il click su una carta (seleziona la carta)
-  const handleCardClick = (card) => {
-    setSelectedCard(card); // Seleziona la carta cliccata
-  };
-
-  // Funzione per aggiungere la carta selezionata a una collezione
   const handleAddToCollection = async () => {
-    if (selectedCollection) {
+    if (selectedCollection && selectedCard) {
       try {
         await axios.post(`/api/collections/${selectedCollection}/addCard`, {
           cardId: selectedCard.id,
           imageUrl: selectedCard.images.small,
         });
-        alert('Carta aggiunta con successo!');
-        onAddCard(); // Aggiorna la collezione nel parent component
+        alert("Carta aggiunta con successo!");
+        onAddCard();
       } catch (error) {
-        console.error('Errore durante l\'aggiunta della carta:', error);
+        console.error("Errore durante l'aggiunta della carta:", error);
       }
     } else {
-      alert('Seleziona una collezione!');
+      alert("Seleziona una collezione e una carta!");
     }
   };
 
@@ -45,7 +38,7 @@ const PokemonSearch = ({ collections, onAddCard }) => {
     <div>
       <h2>Cerca carte Pokémon</h2>
       <Form>
-        <Form.Group controlId="formSearchQuery">
+        <Form.Group>
           <Form.Control
             type="text"
             value={query}
@@ -53,26 +46,24 @@ const PokemonSearch = ({ collections, onAddCard }) => {
             placeholder="Inserisci il nome della carta"
           />
         </Form.Group>
-        <Button variant="primary" onClick={searchCards}>Cerca</Button>
+        <Button onClick={searchCards}>Cerca</Button>
       </Form>
 
-      <Row className="mt-4">
+      <Row>
         {cards.map((card) => (
-          <Col key={card.id} xs={6} md={4} lg={3} className="mb-4">
-            <Card onClick={() => handleCardClick(card)} style={{ cursor: 'pointer' }}>
-              <Card.Img variant="top" src={card.images.small} alt={card.name} />
-              <Card.Body>
-                <Card.Title>{card.name}</Card.Title>
-              </Card.Body>
+          <Col key={card.id}>
+            <Card onClick={() => setSelectedCard(card)}>
+              <Card.Img src={card.images.small} />
+              <Card.Body>{card.name}</Card.Body>
             </Card>
           </Col>
         ))}
       </Row>
 
       {selectedCard && (
-        <div className="add-to-collection mt-4">
+        <div>
           <h3>Aggiungi "{selectedCard.name}" alla collezione</h3>
-          <Form.Group controlId="selectCollection">
+          <Form.Group>
             <Form.Label>Seleziona Collezione</Form.Label>
             <Form.Control
               as="select"
@@ -87,7 +78,7 @@ const PokemonSearch = ({ collections, onAddCard }) => {
               ))}
             </Form.Control>
           </Form.Group>
-          <Button variant="success" onClick={handleAddToCollection}>Aggiungi alla collezione</Button>
+          <Button onClick={handleAddToCollection}>Aggiungi alla collezione</Button>
         </div>
       )}
     </div>

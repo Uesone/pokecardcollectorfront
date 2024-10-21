@@ -39,7 +39,7 @@ const LoginModal = ({ show, handleClose, setIsLoggedIn, setRole }) => {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          username: formData.username, // Usa il campo username
+          username: formData.username,
           password: formData.password,
         }),
       });
