@@ -1,88 +1,102 @@
-import React, { useState } from "react";
-import { Button, Form, Card, Col, Row } from "react-bootstrap";
-import axios from "axios";
+import React, { useState, useEffect } from 'react';
+import SearchBar from './SearchBar';
+import CardGrid from './CardGrid';
+import CardDetailModal from './CardDetailModal';
 
-const PokemonSearch = ({ collections, onAddCard }) => {
-  const [query, setQuery] = useState("");
+const TradingCards = () => {
   const [cards, setCards] = useState([]);
   const [selectedCard, setSelectedCard] = useState(null);
-  const [selectedCollection, setSelectedCollection] = useState("");
+  const [showModal, setShowModal] = useState(false);
+  const [collections, setCollections] = useState([]); // Stato per gestire le collezioni dell'utente
+  const userId = 1; // ID utente statico per ora
 
-  const searchCards = async () => {
+  // Funzione per cercare le carte
+  const fetchPokemonCards = async (query) => {
     try {
-      const response = await axios.get(`/api/pokemon/search?query=${query}`);
-      setCards(response.data);
+      const response = await fetch(`http://localhost:3001/api/pokemon/search?query=${query}`);
+      if (!response.ok) {
+        throw new Error(`Errore HTTP: ${response.status}`);
+      }
+      const data = await response.json();
+      setCards(data);
     } catch (error) {
-      console.error("Errore nella ricerca delle carte:", error);
+      console.error('Errore nella ricerca delle carte Pokémon:', error);
     }
   };
 
-  const handleAddToCollection = async () => {
-    if (selectedCollection && selectedCard) {
-      try {
-        await axios.post(`/api/collections/${selectedCollection}/addCard`, {
-          cardId: selectedCard.id,
-          imageUrl: selectedCard.images.small,
-        });
-        alert("Carta aggiunta con successo!");
-        onAddCard();
-      } catch (error) {
-        console.error("Errore durante l'aggiunta della carta:", error);
+  // Funzione per ottenere le collezioni dell'utente
+  const fetchUserCollections = async () => {
+    try {
+      const response = await fetch(`http://localhost:3001/api/collections/user/${userId}`);
+      if (!response.ok) {
+        throw new Error(`Errore HTTP: ${response.status}`);
       }
-    } else {
-      alert("Seleziona una collezione e una carta!");
+      const data = await response.json();
+      setCollections(data); // Imposta le collezioni nel dropdown
+    } catch (error) {
+      console.error('Errore nel recupero delle collezioni:', error);
     }
   };
+
+  useEffect(() => {
+    fetchUserCollections(); // Recupera le collezioni dell'utente quando la pagina si carica
+  }, []);
+
+  const handleCardClick = (card) => {
+    setSelectedCard(card);
+    setShowModal(true);
+  };
+
+  const handleCloseModal = () => {
+    setShowModal(false);
+  };
+
+  const addCardToCollection = async (collectionId, card) => {
+    try {
+      const response = await fetch(`http://localhost:3001/api/collections/${collectionId}/addCard`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          cardId: card.id,  // Passa il cardId come parte del body JSON
+          imageUrl: card.images.small,  // Passa imageUrl come parte del body JSON
+        }),
+      });
+      if (!response.ok) {
+        throw new Error(`Errore nell'aggiunta della carta: ${response.status}`);
+      }
+      console.log('Carta aggiunta con successo!');
+    } catch (error) {
+      console.error('Errore nell\'aggiungere la carta:', error);
+    }
+  };
+  
+  
 
   return (
-    <div>
-      <h2>Cerca carte Pokémon</h2>
-      <Form>
-        <Form.Group>
-          <Form.Control
-            type="text"
-            value={query}
-            onChange={(e) => setQuery(e.target.value)}
-            placeholder="Inserisci il nome della carta"
-          />
-        </Form.Group>
-        <Button onClick={searchCards}>Cerca</Button>
-      </Form>
+    <div style={styles.page}>
+      <h1>Pokémon Card Search</h1>
+      <SearchBar onSearch={fetchPokemonCards} />
+      <CardGrid cards={cards} onCardClick={handleCardClick} />
 
-      <Row>
-        {cards.map((card) => (
-          <Col key={card.id}>
-            <Card onClick={() => setSelectedCard(card)}>
-              <Card.Img src={card.images.small} />
-              <Card.Body>{card.name}</Card.Body>
-            </Card>
-          </Col>
-        ))}
-      </Row>
-
-      {selectedCard && (
-        <div>
-          <h3>Aggiungi "{selectedCard.name}" alla collezione</h3>
-          <Form.Group>
-            <Form.Label>Seleziona Collezione</Form.Label>
-            <Form.Control
-              as="select"
-              value={selectedCollection}
-              onChange={(e) => setSelectedCollection(e.target.value)}
-            >
-              <option value="">-- Seleziona una collezione --</option>
-              {collections.map((collection) => (
-                <option key={collection.id} value={collection.id}>
-                  {collection.name}
-                </option>
-              ))}
-            </Form.Control>
-          </Form.Group>
-          <Button onClick={handleAddToCollection}>Aggiungi alla collezione</Button>
-        </div>
-      )}
+      <CardDetailModal
+        card={selectedCard}
+        show={showModal}
+        handleClose={handleCloseModal}
+        addCardToCollection={addCardToCollection}
+        collections={collections} // Passa le collezioni all'interno del modale
+      />
     </div>
   );
 };
 
-export default PokemonSearch;
+const styles = {
+  page: {
+    textAlign: 'center',
+    padding: '20px',
+    fontFamily: 'Arial, sans-serif',
+  },
+};
+
+export default TradingCards;
