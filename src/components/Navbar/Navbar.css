@@ -5,37 +5,17 @@
 /* ==================== Layout Navbar (Generale) ==================== */
 .navbar-container {
   display: flex;
-  align-items: center;
   justify-content: space-between;
+  align-items: center;
   background-color: #333;
   padding: 0.5rem 1rem;
-  font-family: 'Roboto', sans-serif;
+  width: 100%;
+  box-sizing: border-box;
 }
 
-/* Div contenitore per i pulsanti LOG IN e SIGN UP */
-.nav-right {
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-  gap: 2rem; /* Aggiunge più spazio tra il menu hamburger e i pulsanti */
-}
-
-/* Div per i pulsanti LOG IN e SIGN UP */
-.auth-buttons {
-  display: flex;
-  align-items: center;
-  gap: 1.5rem; /* Spazio tra i pulsanti di autenticazione */
-}
-
-.nav-right .login-button,
-.nav-right .signup-button {
-  margin-left: 1rem;
-}
-
-/* Cambia il font di PokèAlbum a Press Start 2P dopo il login */
-.press-start-font {
-  font-family: 'Press Start 2P', cursive;
-  color: #F0F0F0;
+/* Logo */
+.navbar-logo-container {
+  flex: 1; /* Occupa il lato sinistro */
 }
 
 .navbar-logo {
@@ -51,19 +31,20 @@
   margin-right: 8px;
 }
 
-/* ==================== NavCenter ==================== */
-.nav-center {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 1.5rem;
-  flex-grow: 1;
+/* Navigazione principale al centro */
+.navbar-nav-container {
+  width: 60%;
+  max-width: 1200px; /* Limita la larghezza del contenitore */
+  padding: 0 20px; /* Aggiunge padding ai lati */
 }
 
 .nav-item {
   display: flex;
   flex-direction: column;
   align-items: center;
+  text-align: center;
+  padding: 0 1rem; /* Aggiunge spazio tra i pulsanti */
+  flex-grow: 1; /* Ogni pulsante occupa lo stesso spazio disponibile */
 }
 
 .nav-button {
@@ -78,45 +59,25 @@
   cursor: pointer;
 }
 
-/* ==================== Icone SVG (Generale) ==================== */
 .navbar-icon {
-  width: 24px;
-  height: 24px;
-  vertical-align: middle;
-  filter: brightness(0) invert(1);
-}
-
-/* ==================== Modifiche dopo il Login ==================== */
-.navbar-logged-in .nav-center {
-  gap: 9.5rem; /* Aumenta la distanza tra i pulsanti dopo il login */
-  justify-content: center; /* Centra i pulsanti */
-}
-
-.navbar-logged-in .nav-button img {
-  width: 36px; /* Dimensione maggiore dell'icona dopo il login */
+  width: 36px;
   height: 36px;
-  margin-bottom: 0.5rem;
-  margin-right: 0;
-}
-
-.navbar-logged-in .nav-button:hover {
-  background-color: #6A93FF;
-  border-radius: 8px;
-}
-
-.navbar-logged-in .nav-button:hover span {
-  font-family: 'Press Start 2P', cursive;
-  color: #F0F0F0;
-}
-
-.navbar-logged-in .nav-button:hover img {
+  margin-bottom: 8px; /* Spazio tra icona e testo */
   filter: brightness(0) invert(1);
 }
 
-.navbar-logged-in .nav-button span {
-  margin-top: 0.0rem;
-  font-size: 0.9rem;
-  margin-right: 2px;
+/* Contenitore autenticazione e menu hamburger */
+.navbar-auth-container {
+  flex: 1; /* Occupa il lato destro */
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.auth-buttons {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
 }
 
 /* ==================== Pulsanti Log In e Sign Up ==================== */
@@ -151,57 +112,56 @@
   filter: brightness(0) invert(1);
 }
 
-/* ==================== Sidebar Styling ==================== */
-.custom-offcanvas .dark-mode-toggle {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0.5rem 1rem;
+/* ==================== Modifiche dopo il Login ==================== */
+.navbar-logged-in .nav-center {
+  justify-content: space-evenly; /* Distribuzione uniforme dei pulsanti dopo il login */
+  gap: 2rem;
 }
 
-.dark-mode-toggle input[type="checkbox"] {
-  margin-left: 0.5rem;
+.navbar-logged-in .nav-button img {
+  width: 36px; /* Icone più grandi */
+  height: 36px;
+  margin-bottom: 0.5rem;
 }
 
-.sidebar-icon {
-  width: 24px;
-  height: 24px;
-  margin-right: 8px;
-  vertical-align: middle;
-  fill: white;
+.navbar-logged-in .nav-button:hover {
+  background-color: #6A93FF;
+  border-radius: 8px;
+}
+
+.navbar-logged-in .nav-button:hover span {
+  font-family: 'Press Start 2P', cursive;
+  color: #F0F0F0;
+}
+
+.navbar-logged-in .nav-button:hover img {
+  filter: brightness(0) invert(1);
+}
+
+.navbar-logged-in .nav-button span {
+  margin-top: 0;
+  font-size: 0.9rem;
 }
 
 /* ==================== Responsive Design ==================== */
-@media (max-width: 991px) {
-  .auth-buttons {
-    display: none;
-  }
-  .nav-center {
-    display: none;
-  }
-}
-
 @media (max-width: 768px) {
+  .navbar-nav-container {
+    display: none; /* Nasconde la navigazione su schermi piccoli */
+  }
+
   .auth-buttons {
-    display: none;
+    display: none; /* Nasconde i pulsanti di autenticazione */
+  }
+
+  .menu-hamburger {
+    display: flex;
   }
 }
 
-/* ==================== Alert ==================== */
-.alert {
-  padding: 10px;
-  margin-bottom: 10px;
-  border-radius: 5px;
-}
-
-.alert-success {
-  background-color: #d4edda;
-  color: #155724;
-  border: 1px solid #c3e6cb;
-}
-
-.alert-danger {
-  background-color: #f8d7da;
-  color: #721c24;
-  border: 1px solid #f5c6cb;
+.sidebar-toggle {
+  display: block;
+  background-color: transparent;
+  border: none;
+  color: #fff;
+  font-size: 1.5rem;
 }

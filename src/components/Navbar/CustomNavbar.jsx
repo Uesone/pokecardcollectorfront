@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Button, Nav } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import '../Navbar/Navbar.css';
+import '../../components/Navbar/Navbar.css';
 import SidebarMenu from '../../components/Navbar/Sidebar/SidebarMenu';
 import AuthManager from '../../js/Auth/AuthManager';
 import logo from '../../assets/pokemon-pokeball-legue-seeklogo.png';
@@ -32,47 +32,36 @@ const CustomNavbar = () => {
   return (
     <>
       <div className={`navbar-container ${isLoggedIn ? 'navbar-logged-in' : ''}`}>
-        <div className="navbar-logo">
-          <img src={logo} alt="logo" />
-          <span className={isLoggedIn ? 'press-start-font' : ''}>PokèAlbum</span>
+        {/* Div per il logo */}
+        <div className="navbar-logo-container">
+          <div className="navbar-logo">
+            <img src={logo} alt="logo" />
+            <span className={isLoggedIn ? 'press-start-font' : ''}>PokèAlbum</span>
+          </div>
         </div>
 
-        {/* Prima del login */}
-        {!isLoggedIn ? (
-          <div className="nav-right">
-            <div className="auth-buttons">
-              <button className="login-button" onClick={() => setShowLoginModal(true)}>LOG IN</button>
-              <button className="signup-button" onClick={() => setShowSignupModal(true)}>SIGN UP</button>
-            </div>
-            <Button variant="outline-light" onClick={toggleSidebar} className="sidebar-toggle">
-              ☰
-            </Button>
-          </div>
-        ) : (
-          // Dopo il login: Mostra i pulsanti di navigazione centrati
-          <div className="nav-center">
-            <Nav className="nav-center">
+        {/* Div centrale per la navigazione che compare solo dopo il login */}
+        {isLoggedIn && (
+          <div className="navbar-nav-container">
+            <Nav className="nav-links">
               <div className="nav-item">
                 <Link to="/" className="nav-button">
                   <img src={homeIcon} alt="Home" className="navbar-icon" />
                   <span>Home</span>
                 </Link>
               </div>
-
               <div className="nav-item">
                 <Link to="/pokedex" className="nav-button">
                   <img src={pokedexIcon} alt="Pokedex" className="navbar-icon" />
                   <span>Pokédex</span>
                 </Link>
               </div>
-
               <div className="nav-item">
                 <Link to="/trading-cards" className="nav-button">
                   <img src={tradingCardsIcon} alt="Trading Cards" className="navbar-icon" />
                   <span>Trading Cards</span>
                 </Link>
               </div>
-
               <div className="nav-item">
                 <Link to="/about-us" className="nav-button">
                   <img src={aboutUsIcon} alt="About Us" className="navbar-icon" />
@@ -80,11 +69,24 @@ const CustomNavbar = () => {
                 </Link>
               </div>
             </Nav>
+          </div>
+        )}
+
+        {/* Div per i pulsanti di autenticazione o menu hamburger */}
+        <div className="navbar-auth-container">
+          {!isLoggedIn ? (
+            <div className="auth-buttons">
+              <button className="login-button" onClick={() => setShowLoginModal(true)}>LOG IN</button>
+              <button className="signup-button" onClick={() => setShowSignupModal(true)}>SIGN UP</button>
+            </div>
+          ) : null}
+
+          <div className="menu-hamburger">
             <Button variant="outline-light" onClick={toggleSidebar} className="sidebar-toggle">
               ☰
             </Button>
           </div>
-        )}
+        </div>
       </div>
 
       {/* Sidebar */}
