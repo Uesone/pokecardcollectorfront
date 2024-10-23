@@ -1,0 +1,173 @@
+.pokedex-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100vh;
+    font-family: Arial, sans-serif;
+    background-color: #f5f5f5;
+  }
+  
+  /* Stile per il selettore di collezioni */
+  .collection-selector {
+    margin-bottom: 20px;
+    text-align: center;
+  }
+  
+  .collection-list {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .collection-list li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    padding: 10px;
+    background-color: #e71d23;
+    color: white;
+    margin: 5px 0;
+    border-radius: 5px;
+  }
+  
+  .collection-list li.selected {
+    background-color: #85cbf2;
+  }
+  
+  .delete-button {
+    background-color: #ff6347;
+    border: none;
+    color: white;
+    cursor: pointer;
+    padding: 5px;
+    border-radius: 5px;
+    margin-left: 10px;
+  }
+  
+  .delete-button:hover {
+    background-color: #ff4500;
+  }
+  
+  .collection-creator {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 10px;
+  }
+  
+  .collection-creator input {
+    padding: 5px;
+    width: 200px;
+  }
+  
+  .collection-creator button {
+    padding: 5px;
+    background-color: #43b0f2;
+    border: none;
+    color: white;
+    cursor: pointer;
+  }
+  
+  .pokedex {
+    display: flex;
+  }
+  
+  .left-container {
+    background: #e71d23;
+    width: 400px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: 3px solid black;
+  }
+  
+  .left-container__top-section {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    padding: 10px;
+  }
+  
+  .top-section__blue {
+    width: 30px;
+    height: 30px;
+    background-color: blue;
+    border-radius: 50%;
+  }
+  
+  .top-section__small-buttons div {
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+  }
+  
+  .top-section__red {
+    background-color: red;
+  }
+  
+  .top-section__yellow {
+    background-color: yellow;
+  }
+  
+  .top-section__green {
+    background-color: green;
+  }
+  
+  .left-container__main-section {
+    background-color: #dedede;
+    border: 3px solid black;
+    width: 90%;
+    height: 300px;
+    margin-top: 20px;
+  }
+  
+  .screen {
+    background-color: black;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .card-image {
+    max-width: 90%;
+    max-height: 90%;
+  }
+  
+  .right-container {
+    background-color: #e71d23;
+    width: 300px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: 3px solid black;
+  }
+  
+  .right-container__screen {
+    background-color: #43b0f2;
+    padding: 10px;
+    border-radius: 10px;
+    height: 300px;
+    overflow-y: scroll;
+  }
+  
+  .card-details {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    color: white;
+  }
+  
+  .right-container__buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+  }
+  
+  .left-button, .right-button {
+    padding: 10px;
+    border: 2px solid black;
+    background-color: #dedede;
+    cursor: pointer;
+  }
+  
