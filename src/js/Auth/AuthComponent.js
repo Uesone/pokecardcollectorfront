@@ -3,7 +3,8 @@ import MessageModal from "../../components/Modals/ErrorModals/MessageModal";
 
 const API_BASE_URL = "http://localhost:3001";
 
-const AuthComponent = ({ setIsLoggedIn, setRole }) => {
+const AuthComponent = ({ setIsLoggedIn, setRole, setUserId }) => {
+  // Aggiungi setUserId
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [messageModal, setMessageModal] = useState({
@@ -27,10 +28,14 @@ const AuthComponent = ({ setIsLoggedIn, setRole }) => {
 
       if (response.ok) {
         const data = await response.json();
-        const { token, role } = data;
+        const { token, role, userId } = data;
         localStorage.setItem("jwtToken", token);
+        localStorage.setItem("userId", userId); // Salva l'ID dell'utente nel localStorage
         setRole(role);
+        setUserId(userId); // Imposta l'ID utente nello stato
         setIsLoggedIn(true);
+        window.location.reload();
+        navigate("/");
       } else {
         setMessageModal({
           show: true,
@@ -49,7 +54,6 @@ const AuthComponent = ({ setIsLoggedIn, setRole }) => {
 
   return (
     <div className="nav-center">
-      {/* Form di login */}
       <div className="input-group">
         <input
           type="text"
@@ -68,12 +72,10 @@ const AuthComponent = ({ setIsLoggedIn, setRole }) => {
           className="input-field"
         />
       </div>
-      {/* Pulsante di login */}
       <button className="login-button" onClick={handleLogin}>
         LOG IN
       </button>
 
-      {/* Modal di messaggi */}
       <MessageModal
         show={messageModal.show}
         message={messageModal.message}

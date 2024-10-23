@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import { Modal, Button, Form } from 'react-bootstrap';
+import './CardDetailModal.css'; // Importa il file CSS
 
 const CardDetailModal = ({ card, show, handleClose, addCardToCollection, collections }) => {
   const [selectedCollectionId, setSelectedCollectionId] = useState(''); // Stato per la collezione selezionata
+  const [showDetailModal, setShowDetailModal] = useState(false); // Stato per il secondo modale (dettagli carta)
 
   const handleAddToCollection = () => {
     if (selectedCollectionId && card && card.id) {
@@ -13,26 +15,73 @@ const CardDetailModal = ({ card, show, handleClose, addCardToCollection, collect
     }
   };
 
-  return (
-    <Modal show={show} onHide={handleClose}>
-      <Modal.Header closeButton>
-        <Modal.Title>{card ? card.name : 'Dettagli Carta'}</Modal.Title>
-      </Modal.Header>
-      <Modal.Body>
-        {card && (
-          <div style={styles.cardContainer}>
-            {/* Immagine della carta */}
-            <div style={styles.imageContainer}>
-              <img
-                src={card.images.large} // Immagine della carta
-                alt={card.name}
-                style={styles.cardImage}
-              />
-            </div>
+  const handleOpenDetailModal = () => {
+    setShowDetailModal(true); // Apre il secondo modale
+  };
 
-            {/* Dettagli della carta */}
-            <div style={styles.detailsContainer}>
-              <h4>{card.name}</h4>
+  const handleCloseDetailModal = () => {
+    setShowDetailModal(false); // Chiude il secondo modale
+  };
+
+  return (
+    <>
+      <Modal show={show} onHide={handleClose} dialogClassName="custom-modal">
+        <Modal.Header closeButton>
+          <Modal.Title>{card ? card.name : 'Dettagli Carta'}</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          {card && (
+            <div className="card-container">
+              {/* Immagine della carta */}
+              <div className="image-container" onClick={handleOpenDetailModal} style={{ cursor: 'pointer' }}>
+                <img
+                  src={card.images.large} // Immagine della carta
+                  alt={card.name}
+                  className="card-image"
+                />
+              </div>
+              {/* Dettagli della carta sono stati rimossi dal primo modale */}
+            </div>
+          )}
+        </Modal.Body>
+        <Modal.Footer className="footer">
+          {/* Menu a tendina per la selezione della collezione */}
+          <Form.Group className="form-group">
+            <Form.Control
+              as="select"
+              value={selectedCollectionId}
+              onChange={(e) => setSelectedCollectionId(e.target.value)}
+              className="select-input"
+            >
+              <option value="">Seleziona una collezione</option>
+              {collections.map((collection) => (
+                <option key={collection.id} value={collection.id}>
+                  {collection.name}
+                </option>
+              ))}
+            </Form.Control>
+          </Form.Group>
+
+          {/* Pulsanti per aggiungere e chiudere */}
+          <div className="button-container">
+            <Button variant="primary" onClick={handleAddToCollection} disabled={!selectedCollectionId} className="add-button">
+              Aggiungi
+            </Button>
+            <Button variant="secondary" onClick={handleClose} className="close-button">
+              Chiudi
+            </Button>
+          </div>
+        </Modal.Footer>
+      </Modal>
+
+      {/* Secondo modale per i dettagli della carta */}
+      <Modal show={showDetailModal} onHide={handleCloseDetailModal} dialogClassName="custom-modal">
+        <Modal.Header closeButton>
+          <Modal.Title>{card ? `${card.name} - Dettagli` : 'Dettagli Carta'}</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          {card && (
+            <div className="details-container">
               <p><strong>ID:</strong> {card.id}</p>
               <p><strong>HP:</strong> {card.hp || 'N/A'}</p>
               <p><strong>Tipo:</strong> {card.types ? card.types.join(', ') : 'N/A'}</p>
@@ -40,60 +89,19 @@ const CardDetailModal = ({ card, show, handleClose, addCardToCollection, collect
               <p><strong>Artista:</strong> {card.artist || 'N/A'}</p>
               <p><strong>Set:</strong> {card.set?.name || 'N/A'} ({card.set?.series || 'N/A'})</p>
               <p><strong>Prezzo di mercato:</strong> {card.tcgplayer?.prices?.normal?.market ? `$${card.tcgplayer.prices.normal.market}` : 'N/A'}</p>
+              {/* Altri dettagli della carta possono essere aggiunti qui */}
             </div>
-          </div>
-        )}
-      </Modal.Body>
-      <Modal.Footer>
-        {/* Menu a tendina per la selezione della collezione */}
-        <Form.Group style={{ flexGrow: 1, marginRight: '10px' }}>
-          <Form.Label>Seleziona una collezione</Form.Label>
-          <Form.Control
-            as="select"
-            value={selectedCollectionId}
-            onChange={(e) => setSelectedCollectionId(e.target.value)}
-          >
-            <option value="">Seleziona una collezione</option>
-            {collections.map((collection) => (
-              <option key={collection.id} value={collection.id}>
-                {collection.name}
-              </option>
-            ))}
-          </Form.Control>
-        </Form.Group>
-
-        {/* Pulsante per aggiungere la carta alla collezione */}
-        <Button variant="primary" onClick={handleAddToCollection} disabled={!selectedCollectionId}>
-          Aggiungi alla Collezione
-        </Button>
-        <Button variant="secondary" onClick={handleClose}>
-          Chiudi
-        </Button>
-      </Modal.Footer>
-    </Modal>
+          )}
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleCloseDetailModal}>
+            Chiudi
+          </Button>
+        </Modal.Footer>
+      </Modal>
+    </>
   );
 };
 
-// Stili per il layout della carta
-const styles = {
-  cardContainer: {
-    display: 'flex', // Disposizione in linea
-    gap: '20px', // Distanza tra immagine e dettagli
-    justifyContent: 'flex-start', // Allinea tutto a sinistra
-  },
-  imageContainer: {
-    flex: '1', // Occupazione dello spazio per l'immagine
-  },
-  cardImage: {
-    width: '100%', // L'immagine occupa tutto lo spazio del contenitore
-    maxWidth: '200px', // Limite massimo per l'immagine
-    borderRadius: '8px', // Arrotonda i bordi
-    boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)', // Aggiunge ombra
-  },
-  detailsContainer: {
-    flex: '2', // Occupa più spazio per i dettagli
-    textAlign: 'left', // Allinea il testo a sinistra
-  },
-};
-
 export default CardDetailModal;
+

@@ -12,10 +12,7 @@ const App = () => {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/trading-cards" element={<TradingCards />} />{" "}
-        {/* Aggiungi la rotta per TradingCards */}
         <Route path="/pokedex" element={<Pokedex />} />{" "}
-        {/* Aggiungi la rotta per Pokedex */}
-        {/* Aggiungi altre rotte per altre pagine */}
       </Routes>
     </Router>
   );

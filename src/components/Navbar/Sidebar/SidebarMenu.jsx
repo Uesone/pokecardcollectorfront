@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Offcanvas, Nav } from "react-bootstrap";
+import { Link } from "react-router-dom"; // Importa Link di react-router-dom
 import LoginModal from "../../Modals/ModaleLogIn/LoginModal"; // Importiamo il LoginModal
 import SignupModal from "../../Modals/ModaleSignUp/SignupModal"; // Importiamo anche il SignupModal
 
@@ -41,11 +42,21 @@ const SidebarMenu = ({
               </>
             ) : (
               <>
-                <Nav.Link href="#home">Home</Nav.Link>
-                <Nav.Link href="#pokedex">Pokédex</Nav.Link>
-                <Nav.Link href="#trading">Trading Cards</Nav.Link>
-                <Nav.Link href="#profile">Profile</Nav.Link>
-                <Nav.Link href="#collections">My Collections</Nav.Link>
+                <Link to="/" className="nav-link" onClick={toggleSidebar}>
+                  Home
+                </Link>
+                <Link to="/pokedex" className="nav-link" onClick={toggleSidebar}>
+                  Pokédex
+                </Link>
+                <Link to="/trading-cards" className="nav-link" onClick={toggleSidebar}>
+                  Trading Cards
+                </Link>
+                <Link to="#profile" className="nav-link" onClick={toggleSidebar}>
+                  Profile
+                </Link>
+                <Link to="#collections" className="nav-link" onClick={toggleSidebar}>
+                  My Collections
+                </Link>
                 <Nav.Link href="#logout" onClick={handleLogout}>
                   Logout
                 </Nav.Link>

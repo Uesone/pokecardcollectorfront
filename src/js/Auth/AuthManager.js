@@ -1,8 +1,11 @@
 import { useEffect } from "react";
+import { useNavigate } from "react-router-dom"; // Importa useNavigate
 
 const API_BASE_URL = "http://localhost:3001";
 
 const AuthManager = ({ setIsLoggedIn, setRole }) => {
+  const navigate = useNavigate(); // Inizializza il hook useNavigate
+
   useEffect(() => {
     const token = localStorage.getItem("jwtToken");
     if (token) {
@@ -33,8 +36,13 @@ const AuthManager = ({ setIsLoggedIn, setRole }) => {
 
   const handleLogout = () => {
     localStorage.removeItem("jwtToken");
+    localStorage.removeItem("userId"); // Rimuovi anche l'ID utente dal localStorage
     setIsLoggedIn(false);
     setRole("");
+    navigate("/"); // Reindirizza alla pagina Home
+
+    // Ricarica la pagina
+    window.location.reload();
   };
 
   return { handleLogout };

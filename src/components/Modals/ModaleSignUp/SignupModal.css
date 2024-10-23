@@ -14,7 +14,7 @@
 
 /* Stile anni '90 all'hover */
 .signup-button:hover {
-    background-color: #6A93FF; /* Colore blu chiaro retrò durante l'hover */
+    background-color: #ff6347; /* Colore blu chiaro retrò durante l'hover */
     color: #F0F0F0; /* Testo bianco durante l'hover */
     font-family: 'Press Start 2P', cursive; /* Font pixelato durante l'hover */
     border: 3px solid #1A1A1A; /* Bordi neri spessi durante l'hover */

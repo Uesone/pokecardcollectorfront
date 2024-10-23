@@ -3,14 +3,18 @@
 @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap'); /* Font stile pixel per i pulsanti */
 
 /* ==================== Layout Navbar (Generale) ==================== */
+/* ==================== Layout Navbar (Generale) ==================== */
 .navbar-container {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: #333;
+  background-color: #1e1e1e;
   padding: 0.5rem 1rem;
   width: 100%;
   box-sizing: border-box;
+  position: sticky; /* Aggiunto sticky */
+  top: 0; /* Posizionamento fisso in alto */
+  z-index: 1000; /* Assicurati che la navbar rimanga sopra altri contenuti */
 }
 
 /* Logo */
@@ -95,7 +99,7 @@
 }
 
 .login-button:hover, .signup-button:hover {
-  background-color: #6A93FF;
+  background-color: #ff6347;
   color: #F0F0F0;
   font-family: 'Press Start 2P', cursive;
   border: 3px solid #1A1A1A;
@@ -125,7 +129,7 @@
 }
 
 .navbar-logged-in .nav-button:hover {
-  background-color: #6A93FF;
+  background-color: #ff6347;
   border-radius: 8px;
 }
 

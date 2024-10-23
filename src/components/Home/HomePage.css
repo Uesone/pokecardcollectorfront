@@ -1,20 +1,57 @@
 .homepage {
-    background-color: #f0f8ff; /* Azzurro chiaro */
-    height: 100vh; /* Riempi l'intera altezza della pagina */
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-  }
-  
-  .homepage h1 {
-    font-size: 3rem;
-    color: #ff6347; /* Arancione vivace */
-  }
-  
-  .homepage p {
-    font-size: 1.5rem;
-    color: #333;
-  }
-  
+  position: relative;
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+#background-video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  object-fit: cover;
+  z-index: -1;
+}
+
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 0;
+  cursor: pointer;
+}
+
+.content {
+  position: relative;
+  z-index: 1;
+  color: #fff;
+  background-color: #1e1e1ec7;
+  padding: 20px;
+  border-radius: 10px;
+  opacity: 0;
+  transform: scale(0.9); /* Effetto di riduzione all'inizio */
+  transition: opacity 1.5s ease-in-out, transform 1.5s ease-in-out; /* Durata maggiore per il fade-in */
+  cursor: pointer; /* Rendi il div cliccabile */
+}
+
+.content.show {
+  opacity: 1;
+  transform: scale(1); /* Torna alla dimensione normale durante il fade-in */
+}
+
+.content h1 {
+  font-size: 3rem;
+  color: #ff6347;
+}
+
+.content p {
+  font-size: 1.5rem;
+  color: #fff;
+}

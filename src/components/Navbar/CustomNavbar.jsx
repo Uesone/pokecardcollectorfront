@@ -36,7 +36,7 @@ const CustomNavbar = () => {
         <div className="navbar-logo-container">
           <div className="navbar-logo">
             <img src={logo} alt="logo" />
-            <span className={isLoggedIn ? 'press-start-font' : ''}>PokèAlbum</span>
+            <span className={isLoggedIn ? 'press-start-font' : ''}>PokèDecks</span>
           </div>
         </div>
 

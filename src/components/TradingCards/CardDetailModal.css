@@ -1,0 +1,64 @@
+.custom-modal .modal-dialog {
+    max-width: 1000px; /* Aumenta la larghezza del modale */
+  }
+  
+  .custom-modal .modal-body {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .card-container {
+    display: flex; /* Disposizione in linea */
+    gap: 20px; /* Distanza tra immagine e dettagli */
+    justify-content: flex-start; /* Allinea tutto a sinistra */
+  }
+  
+  .image-container {
+    flex: 1; /* Occupa lo spazio per l'immagine */
+  }
+  
+  .card-image {
+    width: 100%; /* L'immagine occupa tutto lo spazio del contenitore */
+    max-width: 400px; /* Limite massimo per l'immagine aumentato */
+    height: auto; /* Mantiene le proporzioni corrette */
+    border-radius: 8px; /* Arrotonda i bordi */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Aggiunge ombra */
+  }
+  
+  .details-container {
+    flex: 2; /* Occupa più spazio per i dettagli */
+    text-align: left; /* Allinea il testo a sinistra */
+  }
+  
+  .form-group {
+    width: 100%; /* Fa occupare all'input tutta la larghezza disponibile */
+  }
+  
+  .select-input {
+    font-family: 'Roboto', sans-serif; /* Applica il font Roboto */
+    font-size: 16px; /* Dimensione del testo */
+    padding: 10px; /* Spaziatura interna */
+    border-radius: 4px; /* Arrotonda i bordi */
+  }
+  
+  .footer {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+  }
+  
+  .button-container {
+    display: flex; /* Disposizione dei pulsanti in riga */
+    justify-content: space-between; /* Aggiungi e Chiudi ai lati */
+    margin-top: 10px;
+  }
+  
+  .add-button {
+    flex: 1; /* Pulsante Aggiungi sulla sinistra */
+    margin-right: 10px;
+  }
+  
+  .close-button {
+    flex: 1; /* Pulsante Chiudi sulla destra */
+  }
+  
