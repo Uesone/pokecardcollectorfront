@@ -1,9 +1,7 @@
-import React, { useState } from "react";
-import { Modal, Button, Form } from "react-bootstrap";
-import "bootstrap/dist/css/bootstrap.min.css";
-import MessageModal from "../../Modals/ErrorModals/MessageModal";
-
-const API_BASE_URL = "http://localhost:3001";
+import React, { useState } from 'react';
+import { Modal } from 'react-bootstrap';
+import 'nes.css/css/nes.min.css';
+import MessageModal from '../../Modals/ErrorModals/MessageModal';
 
 const LoginModal = ({ show, handleClose, setIsLoggedIn, setRole }) => {
   const [formData, setFormData] = useState({ username: "", password: "" });
@@ -33,7 +31,7 @@ const LoginModal = ({ show, handleClose, setIsLoggedIn, setRole }) => {
     }
 
     try {
-      const response = await fetch(`${API_BASE_URL}/api/auth/login`, {
+      const response = await fetch(`http://localhost:3001/api/auth/login`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -90,35 +88,40 @@ const LoginModal = ({ show, handleClose, setIsLoggedIn, setRole }) => {
           <Modal.Title>Login</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <Form onSubmit={handleLogin}>
-            <Form.Group className="mb-3" controlId="formUsername">
-              <Form.Label>Username</Form.Label>
-              <Form.Control
+          <form onSubmit={handleLogin}>
+            <div className="nes-field">
+              <label htmlFor="formUsername">Username</label>
+              <input
                 type="text"
+                id="formUsername"
+                className="nes-input"
                 placeholder="Enter username"
                 name="username"
                 value={formData.username}
                 onChange={handleChange}
                 required
               />
-            </Form.Group>
+            </div>
 
-            <Form.Group className="mb-3" controlId="formPassword">
-              <Form.Label>Password</Form.Label>
-              <Form.Control
+            <div className="nes-field">
+              <label htmlFor="formPassword">Password</label>
+              <input
                 type="password"
+                id="formPassword"
+                className="nes-input"
                 placeholder="Password"
                 name="password"
                 value={formData.password}
                 onChange={handleChange}
                 required
               />
-            </Form.Group>
+            </div>
 
-            <Button variant="primary" type="submit">
+            {/* Aggiunta del font 'Press Start 2P' con la classe nes-btn */}
+            <button type="submit" className="nes-btn is-primary">
               Login
-            </Button>
-          </Form>
+            </button>
+          </form>
         </Modal.Body>
       </Modal>
 

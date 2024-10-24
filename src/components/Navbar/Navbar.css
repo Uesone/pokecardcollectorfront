@@ -3,7 +3,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap'); /* Font stile pixel per i pulsanti */
 
 /* ==================== Layout Navbar (Generale) ==================== */
-/* ==================== Layout Navbar (Generale) ==================== */
 .navbar-container {
   display: flex;
   justify-content: space-between;
@@ -37,30 +36,26 @@
 
 /* Navigazione principale al centro */
 .navbar-nav-container {
-  width: 60%;
-  max-width: 1200px; /* Limita la larghezza del contenitore */
+  width: 80%;
   padding: 0 20px; /* Aggiunge padding ai lati */
 }
 
 .nav-item {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
   text-align: center;
   padding: 0 1rem; /* Aggiunge spazio tra i pulsanti */
   flex-grow: 1; /* Ogni pulsante occupa lo stesso spazio disponibile */
 }
 
 .nav-button {
-  background: none;
-  border: none;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
+  background-color: #333; /* Sfondo scuro per i pulsanti */
   color: #f1f1f1;
-  font-size: 1rem;
+  font-family: 'Press Start 2P', cursive; /* Font pixelato */
+  text-transform: uppercase;
+  font-size: 0.9rem;
   cursor: pointer;
+  transition: background-color 0.3s ease, border 0.3s ease, transform 0.3s ease;
+padding: 10px 20px;
+border-radius: 0px;
 }
 
 .navbar-icon {
@@ -71,6 +66,23 @@
 }
 
 /* Contenitore autenticazione e menu hamburger */
+/* Stile personalizzato per il pulsante del menu hamburger */
+.custom-hamburger-btn {
+  background-color: #1e1e1e; /* Colore di sfondo */
+  color: white; /* Colore del testo (icona del menu) */
+  border: 2px solid #ffffff; /* Bordo bianco */
+  padding: 10px; /* Spaziatura interna */
+  font-size: 1.5rem; /* Dimensione del font per il simbolo del menu */
+  cursor: pointer; /* Cursore puntatore */
+}
+
+/* Effetto hover per il pulsante */
+.custom-hamburger-btn:hover {
+  background-color: #ff6347;
+  color: #ffffff; 
+  border-color: #ff6347; 
+}
+
 .navbar-auth-container {
   flex: 1; /* Occupa il lato destro */
   display: flex;
@@ -82,33 +94,14 @@
   display: flex;
   align-items: center;
   gap: 1.5rem;
+  margin-right: 4em;
 }
 
-/* ==================== Pulsanti Log In e Sign Up ==================== */
+/* ==================== Pulsanti Log In e Sign Up con Font "Press Start 2P" ==================== */
 .login-button, .signup-button {
   width: 9em;
   padding: 0.5rem;
-  background-color: white;
-  color: black;
-  font-family: 'Roboto', sans-serif;
-  border: 2px solid black;
-  border-radius: 8px;
-  text-transform: uppercase;
-  cursor: pointer;
-  transition: background-color 0.2s ease, transform 0.1s ease, font-family 0.2s ease, color 0.2s ease;
-}
-
-.login-button:hover, .signup-button:hover {
-  background-color: #ff6347;
-  color: #F0F0F0;
-  font-family: 'Press Start 2P', cursive;
-  border: 3px solid #1A1A1A;
-  transform: translateY(2px);
-}
-
-.login-button:active, .signup-button:active {
-  background-color: #1A1A1A;
-  transform: translateY(2px);
+  font-family: 'Press Start 2P'
 }
 
 /* ==================== Effetto hover per le icone (Prima e dopo il login) ==================== */
@@ -130,7 +123,6 @@
 
 .navbar-logged-in .nav-button:hover {
   background-color: #ff6347;
-  border-radius: 8px;
 }
 
 .navbar-logged-in .nav-button:hover span {
@@ -146,6 +138,10 @@
   margin-top: 0;
   font-size: 0.9rem;
 }
+.nav-button span {
+  text-decoration: none;
+}
+
 
 /* ==================== Responsive Design ==================== */
 @media (max-width: 768px) {

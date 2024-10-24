@@ -18,16 +18,7 @@
   z-index: -1;
 }
 
-.overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  z-index: 0;
-  cursor: pointer;
-}
-
+/* Stile del contenuto */
 .content {
   position: relative;
   z-index: 1;
@@ -38,7 +29,7 @@
   opacity: 0;
   transform: scale(0.9); /* Effetto di riduzione all'inizio */
   transition: opacity 1.5s ease-in-out, transform 1.5s ease-in-out; /* Durata maggiore per il fade-in */
-  cursor: pointer; /* Rendi il div cliccabile */
+
 }
 
 .content.show {
@@ -54,4 +45,21 @@
 .content p {
   font-size: 1.5rem;
   color: #fff;
+}
+
+/* Stile del pulsante di chiusura */
+.close-button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: transparent;
+  border: none;
+  font-size: 2rem;
+  color: #f5f5f5;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.close-button:hover {
+  color: #fff; /* Cambia colore quando l'utente passa sopra il pulsante */
 }

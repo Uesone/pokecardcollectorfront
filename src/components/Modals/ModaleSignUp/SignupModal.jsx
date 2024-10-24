@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { Button, Modal, Form } from 'react-bootstrap';
-import 'bootstrap/dist/css/bootstrap.min.css';
+import { Modal } from 'react-bootstrap';
+import 'nes.css/css/nes.min.css';
 import '../../Modals/ModaleSignUp/SignupModal.css';
 import MessageModal from '../../Modals/ErrorModals/MessageModal';
 
@@ -85,63 +85,71 @@ const SignupModal = ({ show, handleClose }) => {
           <Modal.Title>Sign Up</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <Form onSubmit={handleSubmit}>
-            <Form.Group className="mb-3" controlId="formUsername">
-              <Form.Label>Username</Form.Label>
-              <Form.Control
+          <form onSubmit={handleSubmit}>
+            <div className="nes-field">
+              <label htmlFor="formUsername">Username</label>
+              <input
                 type="text"
+                id="formUsername"
+                className="nes-input"
                 placeholder="Enter username"
                 name="username"
                 value={formData.username}
                 onChange={handleChange}
                 required
               />
-            </Form.Group>
+            </div>
 
-            <Form.Group className="mb-3" controlId="formEmail">
-              <Form.Label>Email</Form.Label>
-              <Form.Control
+            <div className="nes-field">
+              <label htmlFor="formEmail">Email</label>
+              <input
                 type="email"
+                id="formEmail"
+                className="nes-input"
                 placeholder="Enter email"
                 name="email"
                 value={formData.email}
                 onChange={handleChange}
                 required
               />
-            </Form.Group>
+            </div>
 
-            <Form.Group className="mb-3" controlId="formPassword">
-              <Form.Label>Password</Form.Label>
-              <Form.Control
+            <div className="nes-field">
+              <label htmlFor="formPassword">Password</label>
+              <input
                 type="password"
+                id="formPassword"
+                className="nes-input"
                 placeholder="Password"
                 name="password"
                 value={formData.password}
                 onChange={handleChange}
                 required
               />
-            </Form.Group>
+            </div>
 
-            <Form.Group className="mb-3" controlId="formConfirmPassword">
-              <Form.Label>Confirm Password</Form.Label>
-              <Form.Control
+            <div className="nes-field">
+              <label htmlFor="formConfirmPassword">Confirm Password</label>
+              <input
                 type="password"
+                id="formConfirmPassword"
+                className="nes-input"
                 placeholder="Confirm Password"
                 name="confirmPassword"
                 value={formData.confirmPassword}
                 onChange={handleChange}
                 required
               />
-            </Form.Group>
+            </div>
 
-            <Button variant="primary" type="submit">
+            {/* Aggiunta del font 'Press Start 2P' con la classe nes-btn */}
+            <button type="submit" className="nes-btn is-primary">
               Register
-            </Button>
-          </Form>
+            </button>
+          </form>
         </Modal.Body>
       </Modal>
 
-      {/* Modale di messaggio */}
       <MessageModal
         show={messageModal.show}
         handleClose={handleCloseMessageModal}

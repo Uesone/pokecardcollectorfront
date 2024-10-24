@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import { Button, Nav } from 'react-bootstrap';
+import { Nav } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import '../../components/Navbar/Navbar.css';
+import '../../components/Navbar/Navbar.css'; // Non serve più NES.css qui
 import SidebarMenu from '../../components/Navbar/Sidebar/SidebarMenu';
 import AuthManager from '../../js/Auth/AuthManager';
 import logo from '../../assets/pokemon-pokeball-legue-seeklogo.png';
@@ -36,7 +36,7 @@ const CustomNavbar = () => {
         <div className="navbar-logo-container">
           <div className="navbar-logo">
             <img src={logo} alt="logo" />
-            <span className={isLoggedIn ? 'press-start-font' : ''}>PokèDecks</span>
+            <span className={isLoggedIn ? 'nes-text' : ''}>PokèDecks</span>
           </div>
         </div>
 
@@ -76,15 +76,19 @@ const CustomNavbar = () => {
         <div className="navbar-auth-container">
           {!isLoggedIn ? (
             <div className="auth-buttons">
-              <button className="login-button" onClick={() => setShowLoginModal(true)}>LOG IN</button>
-              <button className="signup-button" onClick={() => setShowSignupModal(true)}>SIGN UP</button>
+              <button className="nes-btn is-primary login-button" onClick={() => setShowLoginModal(true)}>
+                LOG IN
+              </button>
+              <button className="nes-btn is-success signup-button" onClick={() => setShowSignupModal(true)}>
+                SIGN UP
+              </button>
             </div>
           ) : null}
 
           <div className="menu-hamburger">
-            <Button variant="outline-light" onClick={toggleSidebar} className="sidebar-toggle">
+            <button className="custom-hamburger-btn sidebar-toggle" onClick={toggleSidebar}>
               ☰
-            </Button>
+            </button>
           </div>
         </div>
       </div>
