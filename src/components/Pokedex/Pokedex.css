@@ -36,6 +36,40 @@
   padding: 8px;
 }
 
+.collection-selector {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: auto;
+}
+
+.collection-list {
+  list-style: none;
+  padding: 0;
+  width: 100%;
+  text-align: center;
+}
+
+.collection-creator {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 10px;
+}
+
+.collection-creator input {
+  width: 100%;
+  padding: 5px;
+  margin-bottom: 5px;
+  box-sizing: border-box;
+}
+
+.collection-creator button {
+  width: 100%;
+  padding: 5px;
+}
+
 .top-section__blue {
   background: radial-gradient(farthest-corner at 10px 10px, white, #369CD4, #369CD4);
   border-radius: 50%;
