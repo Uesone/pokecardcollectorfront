@@ -11,14 +11,14 @@
   padding: 0.5rem 1rem;
   width: 100%;
   box-sizing: border-box;
-  position: sticky; /* Aggiunto sticky */
-  top: 0; /* Posizionamento fisso in alto */
-  z-index: 1000; /* Assicurati che la navbar rimanga sopra altri contenuti */
+  position: sticky; 
+  top: 0;
+  z-index: 1000; 
 }
 
 /* Logo */
 .navbar-logo-container {
-  flex: 1; /* Occupa il lato sinistro */
+  flex: 1;
 }
 
 .navbar-logo {
@@ -37,19 +37,19 @@
 /* Navigazione principale al centro */
 .navbar-nav-container {
   width: 80%;
-  padding: 0 20px; /* Aggiunge padding ai lati */
+  padding: 0 20px; 
 }
 
 .nav-item {
   text-align: center;
-  padding: 0 1rem; /* Aggiunge spazio tra i pulsanti */
-  flex-grow: 1; /* Ogni pulsante occupa lo stesso spazio disponibile */
+  padding: 0 1rem;
+  flex-grow: 1; 
 }
 
 .nav-button {
-  background-color: #333; /* Sfondo scuro per i pulsanti */
+  background-color: #1e1e1e; 
   color: #f1f1f1;
-  font-family: 'Press Start 2P', cursive; /* Font pixelato */
+  font-family: 'Press Start 2P', cursive; 
   text-transform: uppercase;
   font-size: 0.9rem;
   cursor: pointer;
@@ -61,30 +61,26 @@ border-radius: 0px;
 .navbar-icon {
   width: 36px;
   height: 36px;
-  margin-bottom: 8px; /* Spazio tra icona e testo */
+  margin-bottom: 8px; 
   filter: brightness(0) invert(1);
 }
 
 /* Contenitore autenticazione e menu hamburger */
 /* Stile personalizzato per il pulsante del menu hamburger */
 .custom-hamburger-btn {
-  background-color: #1e1e1e; /* Colore di sfondo */
-  color: white; /* Colore del testo (icona del menu) */
-  border: 2px solid #ffffff; /* Bordo bianco */
-  padding: 10px; /* Spaziatura interna */
-  font-size: 1.5rem; /* Dimensione del font per il simbolo del menu */
-  cursor: pointer; /* Cursore puntatore */
+  background-color: #1e1e1e; 
+  color: white; 
+  border: 2px solid #ffffff; 
+  padding: 10px; 
+  font-size: 1.5rem; 
+  cursor: pointer; 
 }
 
 /* Effetto hover per il pulsante */
-.custom-hamburger-btn:hover {
-  background-color: #ff6347;
-  color: #ffffff; 
-  border-color: #ff6347; 
-}
+
 
 .navbar-auth-container {
-  flex: 1; /* Occupa il lato destro */
+  flex: 1; 
   display: flex;
   justify-content: flex-end;
   align-items: center;
@@ -116,13 +112,14 @@ border-radius: 0px;
 }
 
 .navbar-logged-in .nav-button img {
-  width: 36px; /* Icone più grandi */
-  height: 36px;
+  width: 36px; 
+  height: 30px;
   margin-bottom: 0.5rem;
 }
 
 .navbar-logged-in .nav-button:hover {
-  background-color: #ff6347;
+  background-color: #1d2eeb;
+  text-decoration: none;
 }
 
 .navbar-logged-in .nav-button:hover span {
