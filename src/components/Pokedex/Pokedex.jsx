@@ -1,18 +1,16 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback } from 'react'; 
 import './Pokedex.css'; // Importiamo il file CSS per lo stile
 
 const Pokedex = () => {
-  const [collections, setCollections] = useState([]); // Lista delle collezioni create dall'utente
-  const [selectedCollection, setSelectedCollection] = useState(null); // Collezione selezionata
-  const [cards, setCards] = useState([]); // Carte della collezione selezionata
-  const [selectedCard, setSelectedCard] = useState(null); // Carta selezionata per visualizzazione dettagli
-  const [newCollectionName, setNewCollectionName] = useState(''); // Nome per nuova collezione
-  const [error, setError] = useState(''); // Per gestione errori
+  const [collections, setCollections] = useState([]); 
+  const [selectedCollection, setSelectedCollection] = useState(null); 
+  const [cards, setCards] = useState([]); 
+  const [selectedCard, setSelectedCard] = useState(null); 
+  const [newCollectionName, setNewCollectionName] = useState(''); 
+  const [error, setError] = useState(''); 
 
-  // Funzione per ottenere il token JWT
   const getToken = () => localStorage.getItem('jwtToken');
 
-  // Fetch per recuperare le collezioni dell'utente
   const fetchCollections = useCallback(async () => {
     try {
       const response = await fetch('http://localhost:3001/api/collections/user', {
@@ -22,17 +20,16 @@ const Pokedex = () => {
         },
       });
       const data = await response.json();
-      setCollections(data); // Imposta le collezioni recuperate dal backend
+      setCollections(data); 
     } catch (error) {
       console.error('Errore nel recupero delle collezioni:', error);
     }
   }, []);
 
   useEffect(() => {
-    fetchCollections(); // Recupera collezioni dal backend all'avvio del componente
+    fetchCollections(); 
   }, [fetchCollections]);
 
-  // Funzione per creare una nuova collezione
   const createCollection = async () => {
     if (!newCollectionName.trim()) {
       setError('Il nome della collezione non può essere vuoto.');
@@ -48,9 +45,9 @@ const Pokedex = () => {
         body: JSON.stringify({ name: newCollectionName }),
       });
       if (response.ok) {
-        fetchCollections(); // Aggiorna le collezioni dopo la creazione
-        setNewCollectionName(''); // Reset dell'input
-        setError(''); // Resetta eventuali errori
+        fetchCollections(); 
+        setNewCollectionName(''); 
+        setError(''); 
       } else {
         setError('Errore nella creazione della collezione.');
       }
@@ -60,7 +57,6 @@ const Pokedex = () => {
     }
   };
 
-  // Funzione per eliminare una collezione
   const deleteCollection = async (collectionId) => {
     const confirmDelete = window.confirm('Sei sicuro di voler cancellare questa collezione?');
     if (confirmDelete) {
@@ -72,9 +68,9 @@ const Pokedex = () => {
           },
         });
         if (response.ok) {
-          fetchCollections(); // Aggiorna le collezioni dopo l'eliminazione
-          setSelectedCollection(null); // Resetta la collezione selezionata
-          setCards([]); // Svuota la lista delle carte
+          fetchCollections(); 
+          setSelectedCollection(null); 
+          setCards([]); 
         } else {
           console.error('Errore durante l\'eliminazione della collezione.');
         }
@@ -84,12 +80,10 @@ const Pokedex = () => {
     }
   };
 
-  // Funzione per selezionare una collezione e visualizzare le carte
   const selectCollection = async (collection) => {
     setSelectedCollection(collection);
-    setCards(collection.cards); // Imposta le carte della collezione selezionata
+    setCards(collection.cards); 
 
-    // Fetch per ottenere i dettagli delle carte dalla API esterna
     const updatedCards = await Promise.all(collection.cards.map(async (card) => {
       try {
         const response = await fetch(`https://api.pokemontcg.io/v2/cards/${card.cardId}`, {
@@ -103,24 +97,22 @@ const Pokedex = () => {
         }
         const cardDetails = await response.json();
   
-        // Se il formato dei dati non contiene le informazioni richieste, gestiamo un fallback
         if (!cardDetails.data || cardDetails.data.length === 0) {
           console.error('Dettagli della carta non trovati per:', card.cardId);
           return { ...card, details: null };
         }
   
-        return { ...card, details: cardDetails.data }; // Unisce i dettagli della carta con i dati della collezione
+        return { ...card, details: cardDetails.data }; 
       } catch (error) {
         console.error('Errore nel recupero dei dettagli della carta:', error);
-        return card; // Ritorna la carta originale in caso di errore
+        return card; 
       }
     }));
   
-    setCards(updatedCards); // Aggiorna lo stato con le carte arricchite di dettagli
-    setSelectedCard(updatedCards[0]); // Imposta la prima carta come selezionata di default
+    setCards(updatedCards); 
+    setSelectedCard(updatedCards[0]); 
   };
 
-  // Funzione per visualizzare l'immagine e i dettagli della carta
   const renderCardDetails = () => {
     if (!selectedCard) {
       return <p>Seleziona una carta dalla lista</p>;
@@ -145,7 +137,6 @@ const Pokedex = () => {
     );
   };
 
-  // Funzione per navigare tra le carte della collezione (Prev/Next)
   const handleNextCard = () => {
     const currentIndex = cards.findIndex((card) => card.cardId === selectedCard.cardId);
     if (currentIndex < cards.length - 1) {
@@ -162,7 +153,6 @@ const Pokedex = () => {
 
   return (
     <div className="pokedex-container">
-      {/* Selezione delle collezioni */}
       <div className="collection-selector">
         <h2>Seleziona una collezione</h2>
         <ul className="collection-list">
@@ -191,29 +181,66 @@ const Pokedex = () => {
         </div>
       </div>
 
-      {/* Parte sinistra del Pokédex */}
       <div className="pokedex">
         <div className="left-container">
-          <div className="left-container__main-section">
-            <div className="screen">
-              {renderCardDetails()} {/* Mostra immagine e dettagli */}
+          <div className="left-container__top-section">
+            <div className="top-section__blue"></div>
+            <div className="top-section__small-buttons">
+              <div className="top-section__red"></div>
+              <div className="top-section__yellow"></div>
+              <div className="top-section__green"></div>
+            </div>
+          </div>
+          <div className="left-container__main-section-container">
+            <div className="left-container__main-section">
+              <div className="main-section__white">
+                <div className="main-section__black">
+                  <div className="main-screen hide">
+                    <div className="screen__header">
+                      <span className="poke-name"></span>
+                      <span className="poke-id"></span>
+                    </div>
+                    <div className="screen__image">
+                      {renderCardDetails()}
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div className="left-container__controllers">
+                <div className="controllers__d-pad">
+                  <div className="d-pad__cell top"></div>
+                  <div className="d-pad__cell left"></div>
+                  <div className="d-pad__cell middle"></div>
+                  <div className="d-pad__cell right"></div>
+                  <div className="d-pad__cell bottom"></div>
+                </div>
+                <div className="controllers__buttons">
+                  <div className="buttons__button">B</div>
+                  <div className="buttons__button">A</div>
+                </div>
+              </div>
+            </div>
+            <div className="left-container__right">
+              <div className="left-container__hinge"></div>
+              <div className="left-container__hinge"></div>
             </div>
           </div>
         </div>
 
-        {/* Parte destra del Pokédex */}
         <div className="right-container">
-          <div className="right-container__screen">
-            <div className="card-list">
-              {cards.length > 0 ? (
-                cards.map((card) => (
-                  <div key={card.cardId} className="list-item" onClick={() => setSelectedCard(card)}>
-                    {card.cardId}. {card.details ? card.details.name : 'Nome non disponibile'}
-                  </div>
-                ))
-              ) : (
-                <p>Non ci sono carte in questa collezione</p>
-              )}
+          <div className="right-container__black">
+            <div className="right-container__screen">
+              <div className="card-list">
+                {cards.length > 0 ? (
+                  cards.map((card) => (
+                    <div key={card.cardId} className="list-item" onClick={() => setSelectedCard(card)}>
+                      {card.cardId}. {card.details ? card.details.name : 'Nome non disponibile'}
+                    </div>
+                  ))
+                ) : (
+                  <p>Non ci sono carte in questa collezione</p>
+                )}
+              </div>
             </div>
           </div>
           <div className="right-container__buttons">
