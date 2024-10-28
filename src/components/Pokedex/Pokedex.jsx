@@ -162,8 +162,7 @@ const Pokedex = () => {
       </video>
       <div className="centered-pokedex-button">
   {!showPokedex && (
-    <button onClick={() => setShowPokedex(true)} className="show-pokedex-button">
-      Pokédex
+    <button onClick={() => setShowPokedex(true)} className="show-pokedex-button nes-pokeball">
     </button>
   )}
 </div>
