@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "./HomePage.css"; // Importiamo il file CSS per lo stile
-import videoBg from "../../assets/pokedex-pokemon-moewalls-com.mp4"; // Importa il video dal percorso
+import videoBg from "../../assets/may-riding-bicycle-pokemon-emerald-pixel-moewalls-com.mp4"; // Importa il video dal percorso
 
 const HomePage = () => {
   const [showContent, setShowContent] = useState(false);
@@ -29,7 +29,7 @@ const HomePage = () => {
       </video>
 
       {/* Usa la classe 'show' per il fade-in del contenuto */}
-      <div className={`content ${showContent ? 'show' : ''}`}>
+      <div className={`homepage-content ${showContent ? 'show' : ''}`}>
         <button className="close-button" onClick={handleCloseContent}>
           &times;
         </button>

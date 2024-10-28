@@ -19,30 +19,30 @@
 }
 
 /* Stile del contenuto */
-.content {
+.homepage-content {
   position: relative;
   z-index: 1;
   color: #fff;
   background-color: #1e1e1ec7;
   padding: 20px;
-  border-radius: 10px;
+
   opacity: 0;
   transform: scale(0.9); /* Effetto di riduzione all'inizio */
   transition: opacity 1.5s ease-in-out, transform 1.5s ease-in-out; /* Durata maggiore per il fade-in */
-
+  width: 86%;
 }
 
-.content.show {
+.homepage-content.show {
   opacity: 1;
   transform: scale(1); /* Torna alla dimensione normale durante il fade-in */
 }
 
-.content h1 {
+.homepage-content h1 {
   font-size: 3rem;
   color: #ff6347;
 }
 
-.content p {
+.homepage-content p {
   font-size: 1.5rem;
   color: #fff;
 }

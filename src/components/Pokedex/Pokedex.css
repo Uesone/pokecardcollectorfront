@@ -2,22 +2,54 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+
+}
+.background-video {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: -1;
 }
 
+.pokedex-container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+overflow: hidden
+}
+
+
+
+@import url('https://unpkg.com/nes.css/css/nes.min.css');
 
 .pokedex {
   align-items: flex-end;
   display: flex;
-  height: 500px;
+  height: 600px;
   margin: auto;
   width: 800px;
 }
-
+.pokedex-container {
+  background-image: url('');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
 .left-container,
 .right-container {
   border: 3px solid black;
   width: 50%;
 }
+
 
 .right-container {
   border-left: none;
@@ -36,38 +68,89 @@
   padding: 8px;
 }
 
-.collection-selector {
+.collections-container {
+  display: flex;
+  justify-content: space-between;
+  margin: 20px auto;
+  width: 90%;
+}
+
+.collection-creator, .collection-selector {
+  width: 48%;
+}
+
+.collection-creator input,
+
+.collection-selector select,
+.collection-selector button {
+  width: 90%;
+  margin-top: 5px;
+}
+.collection-creator button {
+  width: 40%;
+  margin-top: 3%;
+
+
+}
+.collection-creator {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   margin: auto;
-}
-
-.collection-list {
-  list-style: none;
-  padding: 0;
-  width: 100%;
+  width: 30%;
+  padding: 20px;
+  background-color: #f4f5f5f7; 
+  box-shadow: 4px 4px 0 #888, 8px 8px 0 #333;
+  border-radius: 5px; 
   text-align: center;
+  font-family: 'Press Start 2P', cursive; 
+  margin-top: 2%;
+}
+.collection-creator h2 {
+  font-size: 20px; 
+  font-weight: bold; 
+  color: #333; 
 }
 
-.collection-creator {
+.collection-selector {
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: 10px;
 }
 
-.collection-creator input {
-  width: 100%;
-  padding: 5px;
-  margin-bottom: 5px;
-  box-sizing: border-box;
+.collection-dropdown {
+  padding: 8px;
+  font-size: 14px;
+  border: 2px solid black;
+  border-radius: 5px;
+  background-color: #f5f5f5;
+  color: #333;
+  width: 70%;
 }
 
-.collection-creator button {
-  width: 100%;
-  padding: 5px;
+.collection-dropdown:focus {
+  outline: none;
+  border-color: #369CD4;
+  box-shadow: 0 0 5px #369CD4;
+}
+
+.delete-button {
+  display: block;
+  width: 54%;
+  margin: 15px auto 0;
+  padding: 0px;
+  background-color: #E71D23;
+  color: white;
+  border: none;
+  cursor: pointer;
+  border-radius: 4px;
+  text-align: center;
+  font-size: 12px;
+}
+
+.delete-button:hover {
+  background-color: darkred;
 }
 
 .top-section__blue {
@@ -82,6 +165,20 @@
 .top-section__small-buttons {
   display: flex;
   margin: 0 25px;
+}
+
+.card-details,
+.select-text {
+  font-size: 11px;
+  color: #333;
+  line-height: 1.4;
+}
+
+.poke-name {
+  font-weight: bold;
+  color: #141414;
+  font-size: 17px;
+  margin-bottom: 30px;
 }
 
 .top-section__red,
@@ -100,7 +197,7 @@
 }
 
 .left-container__main-section {
-  height: 100%;
+  height: 110%;
   padding: 25px;
   width: 500px;
 }
@@ -109,11 +206,11 @@
   background: #DEDEDE;
   border: 3px solid black;
   box-shadow: inset 0 0 3px 3px rgba(0,0,0,.3);
-  height: 325px;
+  height: 515px;
 }
 
 .main-section__black {
-  background: black;
+  background: #0d89c645;
   height: calc(100% - 50px);
   margin: 25px;
   padding: 10px;
@@ -130,12 +227,6 @@
   align-items: center;
   display: flex;
   justify-content: space-between;
-}
-
-.poke-name {
-  color: white;
-  font-size: 25px;
-  font-weight: bold;
 }
 
 .poke-id {
@@ -193,11 +284,13 @@
   margin: 10px 25px 0;
 }
 
+
 .controllers__d-pad {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   grid-template-rows: repeat(3, 1fr);
 }
+
 
 .d-pad__cell {
   background: black;
@@ -272,8 +365,7 @@
 
 .buttons__button:last-child {
    margin-top: -5px;
- }
-
+}
 
 .left-container__right {
   border-left: 3px solid black;
@@ -320,12 +412,12 @@
 .right-container__black {
   background: black;
   box-shadow: 0 0 2px 2px rgba(0,0,0,.3);
-  height: 300px;
+  height: 400px;
   padding: 10px;
 }
 
 .right-container__screen {
-  background: #43B0F2;
+  background: #9bbc8cf9;
   border-radius: 15px;
   display: flex;
   flex-direction: column;
@@ -387,7 +479,6 @@
 .right-button:active {
   box-shadow: inset 0 0 2px 2px rgba(0,0,0,.3);
 }
-
 
 .hide {
   display: none;
@@ -463,4 +554,124 @@
 
 .fairy {
   background: #F9AEFF;
+}
+
+.show-pokedex-button {
+  padding: 10px 20px;
+  font-size: 18px;
+  font-weight: bold;
+  cursor: pointer;
+  background-color: #E71D23;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  position: relative;
+  z-index: 1;
+margin-top: 200%;
+}
+.pokedex-content {
+  opacity: 0;
+  transform: scale(0.9);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 20px;
+}
+
+
+.pokedex-content.visible {
+  display: flex;
+  opacity: 1;
+  transform: scale(1);
+}
+
+.add-collection-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1;
+}
+
+.add-collection-modal-content {
+  background: #f4f5f5;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);
+  text-align: center;
+}
+
+/* Bottoni del modale */
+.open-add-collection-modal-button,
+.create-collection-button,
+.close-add-collection-modal-button {
+  padding: 8px 12px;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.open-add-collection-modal-button {
+  margin-left: 10px;
+  background-color: #4CAF50;
+  color: white;
+}
+
+.open-add-collection-modal-button:hover {
+  background-color: #3e9241;
+}
+
+.create-collection-button {
+  background-color: #28A745;
+  color: white;
+}
+
+.create-collection-button:hover {
+  background-color: #176227;
+}
+
+.close-add-collection-modal-button {
+  background-color: red;
+  color: white;
+  margin-top: 15px;
+}
+
+.close-add-collection-modal-button:hover {
+  background-color: darkred;
+}
+.collection-buttons {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  margin-top: 10px;
+  font-size: 11px;
+}
+.collection-buttons.solo-add-collection .open-add-collection-modal-button {
+  background-color: #4CAF50;
+  color: white;
+  font-weight: bold;
+
+}
+
+.delete-collection-button {
+  background-color: #ff6347;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.delete-collection-button:hover {
+  background-color: #e5533d;
+}
+
+.delete-collection-button:focus {
+  outline: none;
 }
