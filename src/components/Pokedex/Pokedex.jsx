@@ -285,17 +285,17 @@ const Pokedex = () => {
           </div>
         )}
 
-        {showNoMoreCardsModal && (
-          <div className="modal-overlay" onClick={closeModal}>
-  <div className="modal-wrapper" onClick={(e) => e.stopPropagation()}>
-    <div className="modal-content">
-      <span className="close-icon" onClick={closeModal}>✕</span>
-      <p>No more cards in the collection!</p>
+{showNoMoreCardsModal && (
+  <div className="custom-modal-overlay" onClick={closeModal}>
+    <div className="custom-modal-wrapper" onClick={(e) => e.stopPropagation()}>
+      <div className="custom-modal-content">
+        <span className="custom-close-icon" onClick={closeModal}>✕</span>
+        <p>No more cards in the collection!</p>
+      </div>
     </div>
   </div>
-</div>
+)}
 
-        )}
 
         {showAddCollectionModal && (
           <div className="add-collection-modal">
