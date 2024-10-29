@@ -32,34 +32,31 @@ const CardDetailModal = ({ card, show, handleClose, addCardToCollection, collect
         <Modal.Body>
           {card && (
             <div className="card-container">
-  <div className="image-container" onClick={handleOpenDetailModal} style={{ cursor: 'pointer' }}>
-    <img src={card.images.large} alt={card.name} className="card-image" />
-  </div>
-</div>
+              <div className="image-container" onClick={handleOpenDetailModal} style={{ cursor: 'pointer' }}>
+                <img src={card.images.large} alt={card.name} className="card-image" />
+              </div>
+            </div>
           )}
         </Modal.Body>
         <Modal.Footer className="footer">
-          <Form.Group className="form-group">
-            <Form.Control
-              as="select"
-              value={selectedCollectionId}
-              onChange={(e) => setSelectedCollectionId(e.target.value)}
-              className="select-input"
-            >
-              <option value="">Seleziona una collezione</option>
-              {collections.map((collection) => (
-                <option key={collection.id} value={collection.id}>
-                  {collection.name}
-                </option>
-              ))}
-            </Form.Control>
-          </Form.Group>
-          <div className="button-container">
+          <div className="action-container">
+            <Form.Group className="form-group">
+              <Form.Control
+                as="select"
+                value={selectedCollectionId}
+                onChange={(e) => setSelectedCollectionId(e.target.value)}
+                className="select-input"
+              >
+                <option value="">Choose a collection</option>
+                {collections.map((collection) => (
+                  <option key={collection.id} value={collection.id}>
+                    {collection.name}
+                  </option>
+                ))}
+              </Form.Control>
+            </Form.Group>
             <Button variant="primary" onClick={handleAddToCollection} disabled={!selectedCollectionId} className="add-button">
-              Aggiungi
-            </Button>
-            <Button variant="secondary" onClick={handleClose} className="close-button">
-              Chiudi
+              ADD
             </Button>
           </div>
         </Modal.Footer>
@@ -80,11 +77,7 @@ const CardDetailModal = ({ card, show, handleClose, addCardToCollection, collect
             </div>
           )}
         </Modal.Body>
-        <Modal.Footer>
-          <Button variant="secondary" onClick={handleCloseDetailModal}>
-            Chiudi
-          </Button>
-        </Modal.Footer>
+        <Modal.Footer />
       </Modal>
     </>
   );

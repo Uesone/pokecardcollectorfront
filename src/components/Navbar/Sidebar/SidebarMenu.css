@@ -1,0 +1,42 @@
+@import url("https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap");
+
+.custom-offcanvas {
+  background-color: #1e1e1e;
+  color: #fff;
+  font-family: 'Press Start 2P', cursive;
+  width: 250px;
+}
+
+.offcanvas-header {
+    background-color: brown;
+}
+
+.custom-offcanvas .offcanvas-header,
+.custom-offcanvas .offcanvas-body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.custom-offcanvas .offcanvas-title {
+  color: #ffcc00;
+  font-size: 1.2rem;
+  text-shadow: 2px 2px 0 #000;
+}
+
+.custom-offcanvas .nav-link,
+.custom-offcanvas .mobile-only {
+  color: #fff;
+  padding: 10px;
+  text-align: center;
+  width: 100%;
+  text-transform: uppercase;
+  transition: color 0.3s ease, background-color 0.3s ease;
+}
+
+.custom-offcanvas .nav-link:hover,
+.custom-offcanvas .mobile-only:hover {
+  color: #ffcc00;
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+}

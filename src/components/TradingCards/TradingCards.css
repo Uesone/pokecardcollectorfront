@@ -119,10 +119,10 @@ body {
 }
 
 .we-arrow {
-  font-size: 24px;
+  font-size: 40px;
   cursor: pointer;
   user-select: none;
-  color: #000;
+  color: #000000;
   padding: 20px;
   z-index: 20;
 }

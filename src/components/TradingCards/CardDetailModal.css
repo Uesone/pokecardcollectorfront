@@ -73,4 +73,18 @@
   .close-button {
     flex: 1; /* Pulsante Chiudi sulla destra */
   }
+  .footer .action-container {
+    display: flex;
+    align-items: center;
+    gap: 10px; /* Spazio tra il selettore e il pulsante */
+  }
+  
+  .footer .form-group {
+    margin-bottom: 0; /* Rimuove il margine inferiore */
+    flex-grow: 1; /* Fa sì che il selettore occupi lo spazio disponibile */
+  }
+  
+  .footer .add-button {
+    white-space: nowrap; /* Mantiene il testo del pulsante su una sola riga */
+  }
   

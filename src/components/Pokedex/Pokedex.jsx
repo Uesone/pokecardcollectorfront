@@ -14,9 +14,15 @@ const Pokedex = () => {
   const [showAddCollectionModal, setShowAddCollectionModal] = useState(false);
   const [showCoinModal, setShowCoinModal] = useState(false);
   const [isClosing, setIsClosing] = useState(false);
-  const [totalCollectionValue, setTotalCollectionValue] = useState(0); // Nuovo stato per valore totale
+  const [totalCollectionValue, setTotalCollectionValue] = useState(0);
+  const [showNoMoreCardsModal, setShowNoMoreCardsModal] = useState(false);
 
   const getToken = () => localStorage.getItem('jwtToken');
+
+  // Funzione per chiudere il modale "No more cards"
+  const closeModal = () => {
+    setShowNoMoreCardsModal(false);
+  };
 
   const fetchCollections = useCallback(async () => {
     try {
@@ -99,7 +105,6 @@ const Pokedex = () => {
     setCards(updatedCards);
     setSelectedCard(updatedCards[0]);
 
-
     const totalValue = updatedCards.reduce((acc, card) => {
       const cardPrice = card.details?.cardmarket?.prices?.averageSellPrice || 0;
       return acc + cardPrice;
@@ -141,6 +146,8 @@ const Pokedex = () => {
   const handleNextCard = () => {
     if (selectedCardIndex < cards.length - 1) {
       setSelectedCardIndex((prevIndex) => prevIndex + 1);
+    } else {
+      setShowNoMoreCardsModal(true); // Mostra il modale "No more cards" quando è l'ultima carta
     }
   };
 
@@ -224,7 +231,6 @@ const Pokedex = () => {
                   ))}
                 </select>
 
-                {/* Icona coin come bottone */}
                 <button onClick={openCoinModal} className="coin-button">
                   <i className="nes-icon coin is-medium"></i>
                 </button>
@@ -270,38 +276,46 @@ const Pokedex = () => {
           </div>
         </div>
 
-        {/* Modale per l'icona coin */}
         {showCoinModal && (
           <div className="coin-modal">
             <div className="coin-modal-content">
               <p>Total Value: €{totalCollectionValue}</p>
-              <button onClick={closeCoinModal} className="close-coin-modal-button">
-               Close
-              </button>
+              <button onClick={closeCoinModal} className="close-coin-modal-button">Close</button>
             </div>
           </div>
         )}
 
-{showAddCollectionModal && (
-  <div className="add-collection-modal">
-    <div className="add-collection-modal-content">
-      <h2>Create a Collection</h2>
-      <input
-        type="text"
-        placeholder="Collection name"
-        value={newCollectionName}
-        onChange={(e) => setNewCollectionName(e.target.value)}
-      />
-      {error && <p className="error">{error}</p>}
-
-      {/* Contenitore per i bottoni */}
-      <div className="add-collection-modal-buttons">
-        <button onClick={createCollection} className="create-collection-button">Create</button>
-        <button onClick={() => setShowAddCollectionModal(false)} className="close-add-collection-modal-button">Close</button>
-      </div>
+        {showNoMoreCardsModal && (
+          <div className="modal-overlay" onClick={closeModal}>
+  <div className="modal-wrapper" onClick={(e) => e.stopPropagation()}>
+    <div className="modal-content">
+      <span className="close-icon" onClick={closeModal}>✕</span>
+      <p>No more cards in the collection!</p>
     </div>
   </div>
-)}
+</div>
+
+        )}
+
+        {showAddCollectionModal && (
+          <div className="add-collection-modal">
+            <div className="add-collection-modal-content">
+              <h2>Create a Collection</h2>
+              <input
+                type="text"
+                placeholder="Collection name"
+                value={newCollectionName}
+                onChange={(e) => setNewCollectionName(e.target.value)}
+              />
+              {error && <p className="error">{error}</p>}
+
+              <div className="add-collection-modal-buttons">
+                <button onClick={createCollection} className="create-collection-button">Create</button>
+                <button onClick={() => setShowAddCollectionModal(false)} className="close-add-collection-modal-button">Close</button>
+              </div>
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );

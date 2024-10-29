@@ -90,15 +90,3 @@
   transform: translateX(697px) rotate(30deg) translateY(172px);
 }
 
-.we-arrow {
-  font-size: 24px;
-  cursor: pointer;
-  user-select: none;
-  color: #000;
-  padding: 20px;
-  z-index: 20;
-}
-
-.we-arrow:hover {
-  color: #555;
-}

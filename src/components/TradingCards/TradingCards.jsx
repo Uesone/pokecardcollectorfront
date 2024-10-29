@@ -1,9 +1,11 @@
 import React, { useState, useEffect, useCallback } from 'react';
+import { Modal } from 'react-bootstrap'; // Importiamo Modal
 import SearchBar from './SearchBar';
 import CardGrid from './CardGrid';
 import CardDetailModal from './CardDetailModal';
 import videoBg from "../../assets/pokemon-emerald-title-screen-pixel-moewalls-com (trading-cards).mp4";
 import './TradingCards.css';
+
 
 const TradingCards = () => {
   const [cards, setCards] = useState([]);
@@ -11,7 +13,8 @@ const TradingCards = () => {
   const [showModal, setShowModal] = useState(false);
   const [collections, setCollections] = useState([]);
   const [showContent, setShowContent] = useState(false);
-  const [showCarousel, setShowCarousel] = useState(false); // Stato per mostrare il carosello dopo la ricerca
+  const [showCarousel, setShowCarousel] = useState(false);
+  const [showSuccessModal, setShowSuccessModal] = useState(false); // Stato per il modale di conferma
 
   const getToken = () => localStorage.getItem('jwtToken');
 
@@ -28,7 +31,7 @@ const TradingCards = () => {
       const data = await response.json();
       console.log('Dati delle carte:', data);
       setCards(data);
-      setShowCarousel(true); // Mostra il carosello solo dopo la ricerca
+      setShowCarousel(true);
     } catch (error) {
       console.error('Errore nella ricerca delle carte Pokémon:', error);
     }
@@ -55,13 +58,12 @@ const TradingCards = () => {
     fetchUserCollections();
   }, [fetchUserCollections]);
 
-  // Effetto per il ritardo della visualizzazione
   useEffect(() => {
     const timer = setTimeout(() => {
       setShowContent(true);
-    }, 3000); // Ritardo di 3 secondi
+    }, 3000);
 
-    return () => clearTimeout(timer); // Pulisce il timer se il componente viene smontato
+    return () => clearTimeout(timer);
   }, []);
 
   const handleCardClick = (card) => {
@@ -89,6 +91,8 @@ const TradingCards = () => {
       });
       if (!response.ok) throw new Error(`Errore nell'aggiunta della carta: ${response.status}`);
       console.log('Carta aggiunta con successo!');
+      setShowSuccessModal(true); // Mostra il modale di successo
+      setTimeout(() => setShowSuccessModal(false), 2000); // Nasconde il modale dopo 2 secondi
     } catch (error) {
       console.error("Errore nell'aggiungere la carta:", error);
     }
@@ -100,7 +104,6 @@ const TradingCards = () => {
         <source src={videoBg} type="video/mp4" />
       </video>
 
-      {/* Mostra il contenuto solo dopo il ritardo */}
       {showContent && (
         <div className="fade-in">
           <SearchBar onSearch={fetchPokemonCards} />
@@ -114,6 +117,13 @@ const TradingCards = () => {
             addCardToCollection={addCardToCollection}
             collections={collections}
           />
+
+          {/* Modale di successo */}
+          <Modal show={showSuccessModal} onHide={() => setShowSuccessModal(false)} centered>
+            <Modal.Body style={{ textAlign: 'center', fontFamily: "'Press Start 2P', cursive", color:"lightgreen" }}>
+              <p>Added Successfully!</p>
+            </Modal.Body>
+          </Modal>
         </div>
       )}
     </div>
@@ -124,8 +134,9 @@ const styles = {
   page: {
     textAlign: 'center',
     padding: '20px',
-    fontFamily: 'Arial, sans-serif',
-  },
+    fontFamily: "'Press Start 2P', cursive", 
+  }
+  
 };
 
 export default TradingCards;
