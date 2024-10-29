@@ -42,35 +42,35 @@ const CustomNavbar = () => {
 
         {/* Div centrale per la navigazione che compare solo dopo il login */}
         {isLoggedIn && (
-          <div className="navbar-nav-container">
-            <Nav className="nav-links">
-              <div className="nav-item">
-                <Link to="/" className="nav-button">
-                  <img src={homeIcon} alt="Home" className="navbar-icon" />
-                  <span>Home</span>
-                </Link>
-              </div>
-              <div className="nav-item">
-                <Link to="/pokedex" className="nav-button">
-                  <img src={pokedexIcon} alt="Pokedex" className="navbar-icon" />
-                  <span>Pokédex</span>
-                </Link>
-              </div>
-              <div className="nav-item">
-                <Link to="/trading-cards" className="nav-button">
-                  <img src={tradingCardsIcon} alt="Trading Cards" className="navbar-icon" />
-                  <span>Trading Cards</span>
-                </Link>
-              </div>
-              <div className="nav-item">
-                <Link to="/about-us" className="nav-button">
-                  <img src={aboutUsIcon} alt="About Us" className="navbar-icon" />
-                  <span>About Us</span>
-                </Link>
-              </div>
-            </Nav>
-          </div>
-        )}
+  <div className="navbar-nav-container">
+    <Nav className="nav-links">
+      <div className="nav-item">
+        <Link to="/" className="nav-button">
+          <img src={homeIcon} alt="Home" className="navbar-icon" />
+          <span>Home</span>
+        </Link>
+      </div>
+      <div className="nav-item">
+        <Link to="/trading-cards" className="nav-button">
+          <img src={tradingCardsIcon} alt="Trading Cards" className="navbar-icon" />
+          <span>Trading Cards</span>
+        </Link>
+      </div>
+      <div className="nav-item">
+        <Link to="/pokedex" className="nav-button">
+          <img src={pokedexIcon} alt="Pokedex" className="navbar-icon" />
+          <span>Pokédex</span>
+        </Link>
+      </div>
+      <div className="nav-item">
+        <Link to="/about-us" className="nav-button">
+          <img src={aboutUsIcon} alt="About Us" className="navbar-icon" />
+          <span>About Us</span>
+        </Link>
+      </div>
+    </Nav>
+  </div>
+)}
 
         {/* Div per i pulsanti di autenticazione o menu hamburger */}
         <div className="navbar-auth-container">

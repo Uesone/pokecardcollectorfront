@@ -486,8 +486,15 @@ overflow: hidden
   cursor: pointer;
   outline: none;
   padding: 0;
-  margin-top: 430%;
-  margin-left:35%;
+
+  position: fixed; /* Posizionamento fisso nella viewport */
+  top: 65%; /* Centra verticalmente */
+  left: 51%; /* Centra orizzontalmente */
+  transform: translate(-50%, -50%); /* Compensa per il centro esatto */
+
+  /* Aggiusta queste proprietà per personalizzare la posizione */
+  margin-top: 0px; /* Sposta leggermente verso l’alto (facoltativo) */
+  margin-left: 10px; /* Sposta leggermente a destra (facoltativo) */
 }
 
 .pokedex-content {
