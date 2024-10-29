@@ -29,6 +29,7 @@ const styles = {
     display: 'flex',
     justifyContent: 'center',
     marginBottom: '20px',
+    marginLeft:'90px',
   },
   input: {
     padding: '10px',

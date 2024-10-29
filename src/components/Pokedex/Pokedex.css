@@ -31,7 +31,6 @@ overflow: hidden
   width: 800px;
 }
 .pokedex-container {
-  background-image: url('');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;

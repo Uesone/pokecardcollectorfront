@@ -1,33 +1,13 @@
 @import url("https://fonts.googleapis.com/css2?family=Montserrat&display=swap");
 
-body {
-  overflow: hidden; /* Evita overflow del video */
-}
-
-.trading-cards-page {
-  position: relative;
-  z-index: 10; /* Assicura che i contenuti siano sopra il video */
-  padding: 50px;
-}
-
-.background-video-fullscreen {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  object-fit: fill; /* Copre l’intera viewport */
-  z-index: -1;
-  pointer-events: none;
-}
 
 .we-carousel {
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: auto;
-  margin-top: 110px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: auto;
+    margin-top: 110px;;
 }
 
 .we-card-container {
@@ -39,7 +19,6 @@ body {
 .we-card {
   width: 200px;
   height: 200px;
-
   color: #000;
   border-radius: 10px;
   padding: 10px;
@@ -51,13 +30,6 @@ body {
   opacity: 0;
   transition: all 0.5s ease;
   filter: none;
-}
-
-.we-card-image {
-  width: 100%;
-  height: auto;
-  border-radius: 8px;
-  margin-bottom: 10px;
 }
 
 .we-card h3 {
@@ -129,17 +101,4 @@ body {
 
 .we-arrow:hover {
   color: #555;
-}
-.fade-in {
-  opacity: 0;
-  animation: fadeIn 2s forwards;
-}
-
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
 }

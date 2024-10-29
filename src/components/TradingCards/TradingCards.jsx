@@ -1,4 +1,3 @@
-// TradingCards.js
 import React, { useState, useEffect, useCallback } from 'react';
 import SearchBar from './SearchBar';
 import CardGrid from './CardGrid';
@@ -11,6 +10,8 @@ const TradingCards = () => {
   const [selectedCard, setSelectedCard] = useState(null);
   const [showModal, setShowModal] = useState(false);
   const [collections, setCollections] = useState([]);
+  const [showContent, setShowContent] = useState(false);
+  const [showCarousel, setShowCarousel] = useState(false); // Stato per mostrare il carosello dopo la ricerca
 
   const getToken = () => localStorage.getItem('jwtToken');
 
@@ -25,7 +26,9 @@ const TradingCards = () => {
       });
       if (!response.ok) throw new Error(`Errore HTTP: ${response.status}`);
       const data = await response.json();
+      console.log('Dati delle carte:', data);
       setCards(data);
+      setShowCarousel(true); // Mostra il carosello solo dopo la ricerca
     } catch (error) {
       console.error('Errore nella ricerca delle carte Pokémon:', error);
     }
@@ -51,6 +54,15 @@ const TradingCards = () => {
   useEffect(() => {
     fetchUserCollections();
   }, [fetchUserCollections]);
+
+  // Effetto per il ritardo della visualizzazione
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setShowContent(true);
+    }, 3000); // Ritardo di 3 secondi
+
+    return () => clearTimeout(timer); // Pulisce il timer se il componente viene smontato
+  }, []);
 
   const handleCardClick = (card) => {
     setSelectedCard(card);
@@ -78,7 +90,7 @@ const TradingCards = () => {
       if (!response.ok) throw new Error(`Errore nell'aggiunta della carta: ${response.status}`);
       console.log('Carta aggiunta con successo!');
     } catch (error) {
-      console.error('Errore nell\'aggiungere la carta:', error);
+      console.error("Errore nell'aggiungere la carta:", error);
     }
   };
 
@@ -88,16 +100,22 @@ const TradingCards = () => {
         <source src={videoBg} type="video/mp4" />
       </video>
 
-      <h1>Pokémon Card Search</h1>
-      <SearchBar onSearch={fetchPokemonCards} />
-      <CardGrid cards={cards} onCardClick={handleCardClick} />
-      <CardDetailModal
-        card={selectedCard}
-        show={showModal}
-        handleClose={handleCloseModal}
-        addCardToCollection={addCardToCollection}
-        collections={collections}
-      />
+      {/* Mostra il contenuto solo dopo il ritardo */}
+      {showContent && (
+        <div className="fade-in">
+          <SearchBar onSearch={fetchPokemonCards} />
+          {showCarousel && (
+            <CardGrid cards={cards} onCardClick={handleCardClick} />
+          )}
+          <CardDetailModal
+            card={selectedCard}
+            show={showModal}
+            handleClose={handleCloseModal}
+            addCardToCollection={addCardToCollection}
+            collections={collections}
+          />
+        </div>
+      )}
     </div>
   );
 };

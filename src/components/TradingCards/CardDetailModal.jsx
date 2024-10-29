@@ -1,14 +1,14 @@
 import React, { useState } from 'react';
 import { Modal, Button, Form } from 'react-bootstrap';
-import './CardDetailModal.css'; // Importa il file CSS
+import './CardDetailModal.css';
 
 const CardDetailModal = ({ card, show, handleClose, addCardToCollection, collections }) => {
-  const [selectedCollectionId, setSelectedCollectionId] = useState(''); // Stato per la collezione selezionata
-  const [showDetailModal, setShowDetailModal] = useState(false); // Stato per il secondo modale (dettagli carta)
+  const [selectedCollectionId, setSelectedCollectionId] = useState('');
+  const [showDetailModal, setShowDetailModal] = useState(false);
 
   const handleAddToCollection = () => {
     if (selectedCollectionId && card && card.id) {
-      addCardToCollection(selectedCollectionId, card); // Aggiungi la carta alla collezione selezionata
+      addCardToCollection(selectedCollectionId, card);
       handleClose();
     } else {
       console.error("Seleziona una collezione e una carta valida.");
@@ -16,11 +16,11 @@ const CardDetailModal = ({ card, show, handleClose, addCardToCollection, collect
   };
 
   const handleOpenDetailModal = () => {
-    setShowDetailModal(true); // Apre il secondo modale
+    setShowDetailModal(true);
   };
 
   const handleCloseDetailModal = () => {
-    setShowDetailModal(false); // Chiude il secondo modale
+    setShowDetailModal(false);
   };
 
   return (
@@ -32,20 +32,13 @@ const CardDetailModal = ({ card, show, handleClose, addCardToCollection, collect
         <Modal.Body>
           {card && (
             <div className="card-container">
-              {/* Immagine della carta */}
-              <div className="image-container" onClick={handleOpenDetailModal} style={{ cursor: 'pointer' }}>
-                <img
-                  src={card.images.large} // Immagine della carta
-                  alt={card.name}
-                  className="card-image"
-                />
-              </div>
-              {/* Dettagli della carta sono stati rimossi dal primo modale */}
-            </div>
+  <div className="image-container" onClick={handleOpenDetailModal} style={{ cursor: 'pointer' }}>
+    <img src={card.images.large} alt={card.name} className="card-image" />
+  </div>
+</div>
           )}
         </Modal.Body>
         <Modal.Footer className="footer">
-          {/* Menu a tendina per la selezione della collezione */}
           <Form.Group className="form-group">
             <Form.Control
               as="select"
@@ -61,8 +54,6 @@ const CardDetailModal = ({ card, show, handleClose, addCardToCollection, collect
               ))}
             </Form.Control>
           </Form.Group>
-
-          {/* Pulsanti per aggiungere e chiudere */}
           <div className="button-container">
             <Button variant="primary" onClick={handleAddToCollection} disabled={!selectedCollectionId} className="add-button">
               Aggiungi
@@ -74,7 +65,6 @@ const CardDetailModal = ({ card, show, handleClose, addCardToCollection, collect
         </Modal.Footer>
       </Modal>
 
-      {/* Secondo modale per i dettagli della carta */}
       <Modal show={showDetailModal} onHide={handleCloseDetailModal} dialogClassName="custom-modal">
         <Modal.Header closeButton>
           <Modal.Title>{card ? `${card.name} - Dettagli` : 'Dettagli Carta'}</Modal.Title>
@@ -82,14 +72,11 @@ const CardDetailModal = ({ card, show, handleClose, addCardToCollection, collect
         <Modal.Body>
           {card && (
             <div className="details-container">
-              <p><strong>ID:</strong> {card.id}</p>
               <p><strong>HP:</strong> {card.hp || 'N/A'}</p>
               <p><strong>Tipo:</strong> {card.types ? card.types.join(', ') : 'N/A'}</p>
               <p><strong>Rarità:</strong> {card.rarity || 'N/A'}</p>
               <p><strong>Artista:</strong> {card.artist || 'N/A'}</p>
               <p><strong>Set:</strong> {card.set?.name || 'N/A'} ({card.set?.series || 'N/A'})</p>
-              <p><strong>Prezzo di mercato:</strong> {card.tcgplayer?.prices?.normal?.market ? `$${card.tcgplayer.prices.normal.market}` : 'N/A'}</p>
-              {/* Altri dettagli della carta possono essere aggiunti qui */}
             </div>
           )}
         </Modal.Body>
@@ -104,4 +91,3 @@ const CardDetailModal = ({ card, show, handleClose, addCardToCollection, collect
 };
 
 export default CardDetailModal;
-

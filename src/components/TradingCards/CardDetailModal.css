@@ -1,29 +1,41 @@
 .custom-modal .modal-dialog {
-    max-width: 1000px; /* Aumenta la larghezza del modale */
-  }
+  max-width: 500px; /* Diminuisce la larghezza del modale */
+  width: 90%; /* Si adatta alla viewport */
+}
+.custom-modal .modal-body {
+  display: flex;
+  justify-content: center; /* Centra il contenuto del modale */
+  align-items: center; /* Centra il contenuto verticalmente */
+}
   
-  .custom-modal .modal-body {
-    display: flex;
-    justify-content: space-between;
-  }
-  
-  .card-container {
-    display: flex; /* Disposizione in linea */
-    gap: 20px; /* Distanza tra immagine e dettagli */
-    justify-content: flex-start; /* Allinea tutto a sinistra */
-  }
-  
-  .image-container {
-    flex: 1; /* Occupa lo spazio per l'immagine */
-  }
-  
+.card-container {
+  display: flex;
+  justify-content: center; /* Centra il contenuto della card-container */
+  gap: 10px;
+  width: 100%; /* Occupa tutta la larghezza disponibile */
+}
+.card-container {
+  display: flex;
+  justify-content: center; /* Centra il contenuto della card-container */
+  gap: 10px;
+  width: 100%; /* Occupa tutta la larghezza disponibile */
+}
+
+.image-container {
+  display: flex;
+  justify-content: center; /* Centra l'immagine orizzontalmente */
+  align-items: center; /* Centra l'immagine verticalmente */
+  flex: 1; /* Occupa tutto lo spazio disponibile */
+}
+
   .card-image {
-    width: 100%; /* L'immagine occupa tutto lo spazio del contenitore */
-    max-width: 400px; /* Limite massimo per l'immagine aumentato */
-    height: auto; /* Mantiene le proporzioni corrette */
-    border-radius: 8px; /* Arrotonda i bordi */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Aggiunge ombra */
+    width: 100%;
+    max-width: 300px; /* Limita la larghezza massima dell'immagine */
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   }
+  
   
   .details-container {
     flex: 2; /* Occupa più spazio per i dettagli */
@@ -35,10 +47,10 @@
   }
   
   .select-input {
-    font-family: 'Roboto', sans-serif; /* Applica il font Roboto */
-    font-size: 16px; /* Dimensione del testo */
-    padding: 10px; /* Spaziatura interna */
-    border-radius: 4px; /* Arrotonda i bordi */
+    font-family: 'Roboto', sans-serif;
+    font-size: 14px; /* Diminuisce la dimensione del testo */
+    padding: 8px;
+    border-radius: 4px;
   }
   
   .footer {
