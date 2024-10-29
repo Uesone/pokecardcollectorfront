@@ -30,9 +30,9 @@ const AboutUs = () => {
             ✕
           </button>
           <div className="social-icons">
-            <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" className="nes-icon is-medium facebook"></a>
-            <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" className="nes-icon is-medium twitter"></a>
-            <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="nes-icon is-medium instagram"></a>
+            <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" className="nes-icon is-large facebook" aria-label="Facebook"></a>
+            <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" className="nes-icon is-large twitter" aria-label="Twitter"></a>
+            <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="nes-icon is-large instagram" aria-label="Instagram"></a>
           </div>
           <h1 className="about-us-title">About Us</h1>
           <p className="about-us-text">
