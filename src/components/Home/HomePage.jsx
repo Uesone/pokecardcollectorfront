@@ -1,26 +1,59 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import "./HomePage.css";
 import videoBg from "../../assets/may-riding-bicycle-pokemon-emerald-pixel-moewalls-com.mp4";
-import logoImage from "../../assets/Remove-bg.ai_1730158329638.png"; // Importa il logo
+import logoImage from "../../assets/Remove-bg.ai_1730158329638.png";
+import pokemonTheme from '../../assets/pokemon-theme.mp3';
+import audioOnIcon from '../../assets/audio-on.png'; // Icona audio attivo 8-bit
+import audioOffIcon from '../../assets/audio-off.png'; // Icona audio disattivo 8-bit
 
 const HomePage = () => {
   const [showContent, setShowContent] = useState(false);
   const [moveToNavbar, setMoveToNavbar] = useState(false);
+  const [isAudioPlaying, setIsAudioPlaying] = useState(false);
+  const audioRef = useRef(null);
 
-  // Mostra il contenuto automaticamente dopo 4 secondi
+  // Funzione per avviare l'audio dopo l'interazione dell'utente
+  const startAudioAfterInteraction = () => {
+    setTimeout(() => {
+      if (audioRef.current) {
+        audioRef.current.volume = 0.3;
+        audioRef.current.play();
+        setIsAudioPlaying(true);
+      }
+    }, 4000);
+    document.removeEventListener("click", startAudioAfterInteraction);
+  };
+
   useEffect(() => {
-    const timer = setTimeout(() => {
+    const contentTimer = setTimeout(() => {
       setShowContent(true);
-      // Attiva il movimento verso la navbar dopo l'animazione iniziale
-      setTimeout(() => setMoveToNavbar(true), 2000); // 2 secondi di ritardo per permettere il fade-in
+      setTimeout(() => setMoveToNavbar(true), 2000);
     }, 4000);
 
-    // Pulizia del timer quando il componente viene smontato
-    return () => clearTimeout(timer);
+    document.addEventListener("click", startAudioAfterInteraction);
+
+    return () => {
+      clearTimeout(contentTimer);
+      document.removeEventListener("click", startAudioAfterInteraction);
+    };
   }, []);
+
+  // Funzione per attivare/disattivare la musica
+  const toggleAudio = () => {
+    if (audioRef.current.paused) {
+      audioRef.current.play();
+      setIsAudioPlaying(true);
+    } else {
+      audioRef.current.pause();
+      setIsAudioPlaying(false);
+    }
+  };
 
   return (
     <div className="homepage">
+      {/* Audio per la musica di sfondo */}
+      <audio ref={audioRef} src={pokemonTheme} loop />
+
       {/* Video di sfondo */}
       <video autoPlay muted loop id="background-video">
         <source src={videoBg} type="video/mp4" />
@@ -31,6 +64,14 @@ const HomePage = () => {
       <div className={`logo-container ${showContent ? "show" : ""} ${moveToNavbar ? "move-to-navbar" : ""}`}>
         <img src={logoImage} alt="PokéDecks Logo" className="logo-image" />
       </div>
+
+      {/* Icona per attivare/disattivare la musica */}
+      <img
+        src={isAudioPlaying ? audioOnIcon : audioOffIcon}
+        onClick={toggleAudio}
+        className="audio-icon"
+        alt={isAudioPlaying ? "Audio On" : "Audio Off"}
+      />
     </div>
   );
 };

@@ -58,3 +58,36 @@ html, body {
   width: 100%; /* Adatta il logo alla larghezza del contenitore */
   height: auto;
 }
+/* Pulsante per attivare/disattivare la musica */
+.toggle-audio-button {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  padding: 10px 20px;
+  font-size: 14px;
+  background-color: #333;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-family: 'Press Start 2P', sans-serif;
+  z-index: 1;
+}
+
+.toggle-audio-button:hover {
+  background-color: #555;
+}
+.audio-icon {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  width: 32px; /* Dimensione dell'icona */
+  height: 32px;
+  cursor: pointer;
+  z-index: 1;
+  image-rendering: pixelated; /* Mantiene l'effetto 8-bit */
+}
+
+.audio-icon:hover {
+  opacity: 0.8;
+}
