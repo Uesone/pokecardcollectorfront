@@ -1,24 +1,23 @@
 import React, { useState, useEffect } from "react";
-import "./HomePage.css"; // Importiamo il file CSS per lo stile
-import videoBg from "../../assets/may-riding-bicycle-pokemon-emerald-pixel-moewalls-com.mp4"; // Importa il video dal percorso
+import "./HomePage.css";
+import videoBg from "../../assets/may-riding-bicycle-pokemon-emerald-pixel-moewalls-com.mp4";
+import logoImage from "../../assets/Remove-bg.ai_1730158329638.png"; // Importa il logo
 
 const HomePage = () => {
   const [showContent, setShowContent] = useState(false);
+  const [moveToNavbar, setMoveToNavbar] = useState(false);
 
   // Mostra il contenuto automaticamente dopo 4 secondi
   useEffect(() => {
     const timer = setTimeout(() => {
       setShowContent(true);
-    }, 4000); // 4 secondi
+      // Attiva il movimento verso la navbar dopo l'animazione iniziale
+      setTimeout(() => setMoveToNavbar(true), 2000); // 2 secondi di ritardo per permettere il fade-in
+    }, 4000);
 
     // Pulizia del timer quando il componente viene smontato
     return () => clearTimeout(timer);
   }, []);
-
-  // Funzione per chiudere il contenuto
-  const handleCloseContent = () => {
-    setShowContent(false);
-  };
 
   return (
     <div className="homepage">
@@ -28,14 +27,9 @@ const HomePage = () => {
         Your browser does not support the video tag.
       </video>
 
-      {/* Usa la classe 'show' per il fade-in del contenuto */}
-      <div className={`homepage-content ${showContent ? 'show' : ''}`}>
-        <button className="close-button" onClick={handleCloseContent}>
-          &times;
-        </button>
-        <h1>Welcome to PokéDecks!</h1>
-        <p>Your personal collection of Pokémon cards awaits you.</p>
-        <p>Create, search, and manage your own Pokémon card album with ease.</p>
+      {/* Div contenitore del logo */}
+      <div className={`logo-container ${showContent ? "show" : ""} ${moveToNavbar ? "move-to-navbar" : ""}`}>
+        <img src={logoImage} alt="PokéDecks Logo" className="logo-image" />
       </div>
     </div>
   );

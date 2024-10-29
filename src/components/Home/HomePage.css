@@ -13,6 +13,7 @@ html, body {
   text-align: center;
 }
 
+/* Video di sfondo */
 #background-video {
   position: absolute;
   top: 0;
@@ -23,48 +24,37 @@ html, body {
   z-index: -1;
 }
 
-/* Stile del contenuto */
-.homepage-content {
-  position: relative;
+/* Contenitore del logo, centrato senza translate */
+.logo-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed; /* Posizione iniziale centrata */
+  top: 20%; /* Posizione iniziale */
+  left: 30%; /* Posizione iniziale */
   z-index: 1;
-  color: #fff;
-  background-color: #1e1e1ec7;
-  padding: 20px;
-
+  width: 100%;
+  max-width: 500px;
   opacity: 0;
-  transform: scale(0.9); /* Effetto di riduzione all'inizio */
-  transition: opacity 1.5s ease-in-out, transform 1.5s ease-in-out; /* Durata maggiore per il fade-in */
-  width: 86%;
+  transition: opacity 1.5s ease-in-out; /* Effetto fade-in */
 }
 
-.homepage-content.show {
+/* Mostra il contenitore con il fade-in iniziale */
+.logo-container.show {
   opacity: 1;
-  transform: scale(1); /* Torna alla dimensione normale durante il fade-in */
 }
 
-.homepage-content h1 {
-  font-size: 3rem;
-  color: #ff6347;
+/* Movimento del contenitore verso la navbar */
+.logo-container.move-to-navbar {
+  position: fixed;
+  top: 80px; /* Posizione finale sotto la navbar */
+  left: 50px; /* Posizione finale */
+  max-width: 200px; /* Dimensione ridotta */
+  transition: top 2s ease-in-out, left 2s ease-in-out, max-width 2s ease-in-out;
 }
 
-.homepage-content p {
-  font-size: 1.5rem;
-  color: #fff;
-}
-
-/* Stile del pulsante di chiusura */
-.close-button {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  background: transparent;
-  border: none;
-  font-size: 2rem;
-  color: #f5f5f5;
-  cursor: pointer;
-  transition: color 0.3s ease;
-}
-
-.close-button:hover {
-  color: #fff; /* Cambia colore quando l'utente passa sopra il pulsante */
+/* Stile per l'immagine del logo */
+.logo-image {
+  width: 100%; /* Adatta il logo alla larghezza del contenitore */
+  height: auto;
 }

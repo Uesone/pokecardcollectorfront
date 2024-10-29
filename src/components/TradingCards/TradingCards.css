@@ -1,43 +1,60 @@
+/* TradingCards.css */
+body {
+  overflow: hidden; /* Evita overflow del video */
+}
+
 .trading-cards-page {
-    padding: 2rem;
-  }
-  
-  .search-filters {
-    display: flex;
-    gap: 1rem;
-    margin-bottom: 1rem;
-  }
-  
-  .search-filters input,
-  .search-filters select {
-    padding: 0.5rem;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-  }
-  
-  .cards-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 1.5rem;
-  }
-  
-  .card {
-    border: 1px solid #ccc;
-    padding: 1rem;
-    text-align: center;
-  }
-  
-  .card img {
-    width: 100%;
-    height: auto;
-  }
-  
-  .card button {
-    margin-top: 1rem;
-    padding: 0.5rem 1rem;
-    background-color: #ff6347;
-    color: #fff;
-    border: none;
-    cursor: pointer;
-  }
-  
+  position: relative;
+  z-index: 10; /* Assicura che i contenuti siano sopra il video */
+  padding: 2rem;
+}
+
+.background-video-fullscreen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  object-fit: fill; /* Copre l’intera viewport */
+  z-index: -1;
+  pointer-events: none;
+}
+
+.search-filters {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.search-filters input,
+.search-filters select {
+  padding: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.5rem;
+}
+
+.card {
+  border: 1px solid #ccc;
+  padding: 1rem;
+  text-align: center;
+}
+
+.card img {
+  width: 100%;
+  height: auto;
+}
+
+.card button {
+  margin-top: 1rem;
+  padding: 0.5rem 1rem;
+  background-color: #ff6347;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+}

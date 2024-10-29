@@ -12,6 +12,9 @@ const Pokedex = () => {
   const [error, setError] = useState('');
   const [showPokedex, setShowPokedex] = useState(false);
   const [showAddCollectionModal, setShowAddCollectionModal] = useState(false);
+  const [showCoinModal, setShowCoinModal] = useState(false);
+  const [isClosing, setIsClosing] = useState(false);
+  const [totalCollectionValue, setTotalCollectionValue] = useState(0); // Nuovo stato per valore totale
 
   const getToken = () => localStorage.getItem('jwtToken');
 
@@ -26,7 +29,7 @@ const Pokedex = () => {
       const data = await response.json();
       setCollections(data);
     } catch (error) {
-      console.error('Errore nel recupero delle collezioni:', error);
+      console.error('Error fetching collections:', error);
     }
   }, []);
 
@@ -36,7 +39,7 @@ const Pokedex = () => {
 
   const createCollection = async () => {
     if (!newCollectionName.trim()) {
-      setError('Il nome della collezione non può essere vuoto.');
+      setError('Cannot be empty.');
       return;
     }
     try {
@@ -52,38 +55,26 @@ const Pokedex = () => {
         fetchCollections();
         setNewCollectionName('');
         setError('');
-        setShowAddCollectionModal(false); // Chiudi il modale dopo la creazione
+        setShowAddCollectionModal(false);
       } else {
-        setError('Errore nella creazione della collezione.');
+        setError('Error adding collection');
       }
     } catch (error) {
-      setError('Errore durante la creazione della collezione.');
-      console.error('Errore durante la creazione della collezione:', error);
+      setError('Errore during collection creation.');
+      console.error('Errore during collection creation.:', error);
     }
   };
 
-  const deleteCollection = async (collectionId) => {
-    const confirmDelete = window.confirm('Sei sicuro di voler cancellare questa collezione?');
-    if (confirmDelete) {
-      try {
-        const response = await fetch(`http://localhost:3001/api/collections/${collectionId}`, {
-          method: 'DELETE',
-          headers: {
-            'Authorization': `Bearer ${getToken()}`,
-          },
-        });
-        if (response.ok) {
-          fetchCollections();
-          setSelectedCollection(null);
-          setCards([]);
-          setSelectedCardIndex(0);
-        } else {
-          console.error('Errore durante l\'eliminazione della collezione.');
-        }
-      } catch (error) {
-        console.error('Errore durante l\'eliminazione della collezione:', error);
-      }
-    }
+  const openPokedex = () => {
+    setIsClosing(false);
+    setShowPokedex(true);
+  };
+
+  const closePokedex = () => {
+    setIsClosing(true);
+    setTimeout(() => {
+      setShowPokedex(false);
+    }, 0);
   };
 
   const selectCollection = async (collection) => {
@@ -100,13 +91,20 @@ const Pokedex = () => {
         const cardDetails = await response.json();
         return { ...card, details: cardDetails.data };
       } catch (error) {
-        console.error('Errore nel recupero dei dettagli della carta:', error);
+        console.error('Error fetching cards data:', error);
         return card;
       }
     }));
 
     setCards(updatedCards);
     setSelectedCard(updatedCards[0]);
+
+
+    const totalValue = updatedCards.reduce((acc, card) => {
+      const cardPrice = card.details?.cardmarket?.prices?.averageSellPrice || 0;
+      return acc + cardPrice;
+    }, 0);
+    setTotalCollectionValue(totalValue.toFixed(2)); 
   };
 
   useEffect(() => {
@@ -115,6 +113,31 @@ const Pokedex = () => {
     }
   }, [selectedCardIndex, cards]);
 
+  const deleteCollection = async (collectionId) => {
+    const confirmDelete = window.confirm('Are you sure?');
+    if (confirmDelete) {
+      try {
+        const response = await fetch(`http://localhost:3001/api/collections/${collectionId}`, {
+          method: 'DELETE',
+          headers: {
+            'Authorization': `Bearer ${getToken()}`,
+          },
+        });
+        if (response.ok) {
+          fetchCollections();
+          setSelectedCollection(null);
+          setCards([]);
+          setSelectedCardIndex(0);
+          setTotalCollectionValue(0); 
+        } else {
+          console.error('Errore durante l\'eliminazione della collezione.');
+        }
+      } catch (error) {
+        console.error('Errore durante l\'eliminazione della collezione:', error);
+      }
+    }
+  };
+  
   const handleNextCard = () => {
     if (selectedCardIndex < cards.length - 1) {
       setSelectedCardIndex((prevIndex) => prevIndex + 1);
@@ -146,14 +169,17 @@ const Pokedex = () => {
       <div className="card-details">
         <h3 className="poke-name">{selectedCard.details ? selectedCard.details.name : selectedCard.cardId}</h3>
         <p>HP: {selectedCard.details?.hp || 'N/A'}</p>
-        <p>Tipo: {selectedCard.details?.types?.join(', ') || 'N/A'}</p>
-        <p>Rarità: {selectedCard.details?.rarity || 'N/A'}</p>
+        <p>Type: {selectedCard.details?.types?.join(', ') || 'N/A'}</p>
+        <p>Rarity: {selectedCard.details?.rarity || 'N/A'}</p>
         <p>Set: {selectedCard.details?.set?.name || 'N/A'}</p>
-        <p>Artista: {selectedCard.details?.artist || 'N/A'}</p>
-        <p>Prezzo di Mercato: €{selectedCard.details?.cardmarket?.prices?.averageSellPrice || 'N/A'}</p>
+        <p>Artist: {selectedCard.details?.artist || 'N/A'}</p>
+        <p>Average Price: €{selectedCard.details?.cardmarket?.prices?.averageSellPrice || 'N/A'}</p>
       </div>
     );
   };
+
+  const openCoinModal = () => setShowCoinModal(true);
+  const closeCoinModal = () => setShowCoinModal(false);
 
   return (
     <div className="pokedex-container">
@@ -161,14 +187,15 @@ const Pokedex = () => {
         <source src={videoBg} type="video/mp4" />
       </video>
       <div className="centered-pokedex-button">
-  {!showPokedex && (
-    <button onClick={() => setShowPokedex(true)} className="show-pokedex-button nes-pokeball">
-    </button>
-  )}
-</div>
+        {!showPokedex && (
+          <button onClick={openPokedex} className="show-pokedex-button nes-pokeball">
+          </button>
+        )}
+      </div>
 
-      <div className={`pokedex-content ${showPokedex ? 'visible' : ''}`}>
+      <div className={`pokedex-content ${showPokedex ? 'visible' : ''} ${isClosing ? 'close' : ''}`}>
         <div className="pokedex">
+          <button className="close-pokedex-button" onClick={closePokedex}>✕</button>
           <div className="left-container">
             <div className="left-container__top-section">
               <div className="top-section__blue"></div>
@@ -177,24 +204,31 @@ const Pokedex = () => {
                 <div className="top-section__yellow"></div>
                 <div className="top-section__green"></div>
               </div>
-              <select
-                className="collection-dropdown"
-                onChange={(e) => {
-                  const selectedId = e.target.value;
-                  const collection = collections.find((col) => col.id.toString() === selectedId);
-                  if (collection) {
-                    selectCollection(collection);
-                  }
-                }}
-                value={selectedCollection?.id || ''}
-              >
-                <option value="" disabled>Select a collection</option>
-                {collections.map((collection) => (
-                  <option key={collection.id} value={collection.id}>
-                    {collection.name}
-                  </option>
-                ))}
-              </select>
+              <div className="collection-dropdown-wrapper">
+                <select
+                  className="collection-dropdown"
+                  onChange={(e) => {
+                    const selectedId = e.target.value;
+                    const collection = collections.find((col) => col.id.toString() === selectedId);
+                    if (collection) {
+                      selectCollection(collection);
+                    }
+                  }}
+                  value={selectedCollection?.id || ''}
+                >
+                  <option value="" disabled>Select a collection</option>
+                  {collections.map((collection) => (
+                    <option key={collection.id} value={collection.id}>
+                      {collection.name}
+                    </option>
+                  ))}
+                </select>
+
+                {/* Icona coin come bottone */}
+                <button onClick={openCoinModal} className="coin-button">
+                  <i className="nes-icon coin is-medium"></i>
+                </button>
+              </div>
             </div>
             <div className="left-container__main-section-container">
               <div className="left-container__main-section">
@@ -218,46 +252,56 @@ const Pokedex = () => {
               <button className="right-button" onClick={handleNextCard}>Next</button>
             </div>
             <div className={`collection-buttons ${!selectedCollection ? 'solo-add-collection' : ''}`}>
-  {selectedCollection && (
-    <button
-      className="delete-collection-button"
-      onClick={() => deleteCollection(selectedCollection.id)}
-    >
-      Delete Collection
-    </button>
-  )}
-  <button
-    className="open-add-collection-modal-button"
-    onClick={() => setShowAddCollectionModal(true)}
-  >
-    Add Collection
-  </button>
-</div>
-
+              {selectedCollection && (
+                <button
+                  className="delete-collection-button"
+                  onClick={() => deleteCollection(selectedCollection.id)}
+                >
+                  Delete Collection
+                </button>
+              )}
+              <button
+                className="open-add-collection-modal-button"
+                onClick={() => setShowAddCollectionModal(true)}
+              >
+                Add Collection
+              </button>
+            </div>
           </div>
         </div>
 
-        {showAddCollectionModal && (
-          <div className="add-collection-modal">
-            <div className="add-collection-modal-content">
-              <h2>Create a Collection</h2>
-              <input
-                type="text"
-                placeholder="Collection name"
-                value={newCollectionName}
-                onChange={(e) => setNewCollectionName(e.target.value)}
-              />
-              <button onClick={createCollection} className="create-collection-button">Create</button>
-              {error && <p className="error">{error}</p>}
-              <button
-                onClick={() => setShowAddCollectionModal(false)}
-                className="close-add-collection-modal-button"
-              >
-                Close
+        {/* Modale per l'icona coin */}
+        {showCoinModal && (
+          <div className="coin-modal">
+            <div className="coin-modal-content">
+              <p>Total Value: €{totalCollectionValue}</p>
+              <button onClick={closeCoinModal} className="close-coin-modal-button">
+               Close
               </button>
             </div>
           </div>
         )}
+
+{showAddCollectionModal && (
+  <div className="add-collection-modal">
+    <div className="add-collection-modal-content">
+      <h2>Create a Collection</h2>
+      <input
+        type="text"
+        placeholder="Collection name"
+        value={newCollectionName}
+        onChange={(e) => setNewCollectionName(e.target.value)}
+      />
+      {error && <p className="error">{error}</p>}
+
+      {/* Contenitore per i bottoni */}
+      <div className="add-collection-modal-buttons">
+        <button onClick={createCollection} className="create-collection-button">Create</button>
+        <button onClick={() => setShowAddCollectionModal(false)} className="close-add-collection-modal-button">Close</button>
+      </div>
+    </div>
+  </div>
+)}
       </div>
     </div>
   );

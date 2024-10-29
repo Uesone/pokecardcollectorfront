@@ -1,7 +1,10 @@
+// TradingCards.js
 import React, { useState, useEffect, useCallback } from 'react';
 import SearchBar from './SearchBar';
 import CardGrid from './CardGrid';
 import CardDetailModal from './CardDetailModal';
+import videoBg from "../../assets/pokemon-emerald-title-screen-pixel-moewalls-com (trading-cards).mp4";
+import './TradingCards.css';
 
 const TradingCards = () => {
   const [cards, setCards] = useState([]);
@@ -9,24 +12,18 @@ const TradingCards = () => {
   const [showModal, setShowModal] = useState(false);
   const [collections, setCollections] = useState([]);
 
-  // Funzione per ottenere il token JWT
-  const getToken = () => {
-    return localStorage.getItem('jwtToken');
-  };
+  const getToken = () => localStorage.getItem('jwtToken');
 
-  // Funzione per cercare le carte
   const fetchPokemonCards = async (query) => {
     try {
       const token = getToken();
       const response = await fetch(`http://localhost:3001/api/pokemon/search?query=${query}`, {
         method: 'GET',
         headers: {
-          'Authorization': `Bearer ${token}`, // Includi il token JWT nell'intestazione
+          'Authorization': `Bearer ${token}`,
         },
       });
-      if (!response.ok) {
-        throw new Error(`Errore HTTP: ${response.status}`);
-      }
+      if (!response.ok) throw new Error(`Errore HTTP: ${response.status}`);
       const data = await response.json();
       setCards(data);
     } catch (error) {
@@ -34,28 +31,25 @@ const TradingCards = () => {
     }
   };
 
-  // Funzione per ottenere le collezioni dell'utente
   const fetchUserCollections = useCallback(async () => {
     try {
       const token = getToken();
       const response = await fetch('http://localhost:3001/api/collections/user', {
         method: 'GET',
         headers: {
-          'Authorization': `Bearer ${token}`, // Includi il token JWT nell'intestazione
+          'Authorization': `Bearer ${token}`,
         },
       });
-      if (!response.ok) {
-        throw new Error(`Errore HTTP: ${response.status}`);
-      }
+      if (!response.ok) throw new Error(`Errore HTTP: ${response.status}`);
       const data = await response.json();
-      setCollections(data); // Imposta le collezioni nel dropdown
+      setCollections(data);
     } catch (error) {
       console.error('Errore nel recupero delle collezioni:', error);
     }
   }, []);
 
   useEffect(() => {
-    fetchUserCollections(); // Recupera le collezioni dell'utente quando la pagina si carica
+    fetchUserCollections();
   }, [fetchUserCollections]);
 
   const handleCardClick = (card) => {
@@ -74,16 +68,14 @@ const TradingCards = () => {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': `Bearer ${token}`, // Includi il token JWT nell'intestazione
+          'Authorization': `Bearer ${token}`,
         },
         body: JSON.stringify({
-          cardId: card.id,  // Passa il cardId come parte del body JSON
-          imageUrl: card.images.small,  // Passa imageUrl come parte del body JSON
+          cardId: card.id,
+          imageUrl: card.images.small,
         }),
       });
-      if (!response.ok) {
-        throw new Error(`Errore nell'aggiunta della carta: ${response.status}`);
-      }
+      if (!response.ok) throw new Error(`Errore nell'aggiunta della carta: ${response.status}`);
       console.log('Carta aggiunta con successo!');
     } catch (error) {
       console.error('Errore nell\'aggiungere la carta:', error);
@@ -91,17 +83,20 @@ const TradingCards = () => {
   };
 
   return (
-    <div style={styles.page}>
+    <div style={styles.page} className="trading-cards-page">
+      <video autoPlay loop muted className="background-video-fullscreen">
+        <source src={videoBg} type="video/mp4" />
+      </video>
+
       <h1>Pokémon Card Search</h1>
       <SearchBar onSearch={fetchPokemonCards} />
       <CardGrid cards={cards} onCardClick={handleCardClick} />
-
       <CardDetailModal
         card={selectedCard}
         show={showModal}
         handleClose={handleCloseModal}
         addCardToCollection={addCardToCollection}
-        collections={collections} // Passa le collezioni all'interno del modale
+        collections={collections}
       />
     </div>
   );
