@@ -3,8 +3,8 @@ import "./HomePage.css";
 import videoBg from "../../assets/may-riding-bicycle-pokemon-emerald-pixel-moewalls-com.mp4";
 import logoImage from "../../assets/Remove-bg.ai_1730158329638.png";
 import pokemonTheme from '../../assets/pokemon-theme.mp3';
-import audioOnIcon from '../../assets/audio-on.png'; // Icona audio attivo 8-bit
-import audioOffIcon from '../../assets/audio-off.png'; // Icona audio disattivo 8-bit
+import audioOnIcon from '../../assets/audio-on.png';
+import audioOffIcon from '../../assets/audio-off.png'; 
 
 const HomePage = () => {
   const [showContent, setShowContent] = useState(false);
@@ -16,7 +16,7 @@ const HomePage = () => {
   const startAudioAfterInteraction = () => {
     setTimeout(() => {
       if (audioRef.current) {
-        audioRef.current.volume = 0.3;
+        audioRef.current.volume = 0.1;
         audioRef.current.play();
         setIsAudioPlaying(true);
       }
