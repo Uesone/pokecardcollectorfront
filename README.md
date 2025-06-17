@@ -31,16 +31,16 @@ Search, collect, and track your cards in your personal Pokédex — see the tota
 ## 🖼️ Preview
 
 ### Home
-![Home](https://github.com/Uesone/pokecardcollectorfront/blob/master/screenshots/home.png?raw=true)
+![Home](https://github.com/Uesone/pokecardcollectorfront/blob/master/home.png?raw=true)
 
 ### Trading Cards
-![Trading Cards](https://github.com/Uesone/pokecardcollectorfront/blob/master/screenshots/tradingcards.png?raw=true)
+![Trading Cards](https://github.com/Uesone/pokecardcollectorfront/blob/master/tradingcards.png?raw=true)
 
 ### Pokedex
-![Pokedex](https://github.com/Uesone/pokecardcollectorfront/blob/master/screenshots/pokedex.png?raw=true)
+![Pokedex](https://github.com/Uesone/pokecardcollectorfront/blob/master/pokedex.png?raw=true)
 
 ### About Us
-![About Us](https://github.com/Uesone/pokecardcollectorfront/blob/master/screenshots/aboutus.png?raw=true)
+![About Us](https://github.com/Uesone/pokecardcollectorfront/blob/master/aboutus.png?raw=true)
 
 ---
 
