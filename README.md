@@ -1,70 +1,106 @@
-# Getting Started with Create React App
+# 💻 Pokedecks – Frontend
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Pixel art web app for Pokémon TCG lovers!  
+Search, collect, and track your cards in your personal Pokédex — see the total value of your collection in real time.
 
-## Available Scripts
+> **Note:** Pokedecks is currently available **only as a desktop web app**.
 
-In the project directory, you can run:
+---
 
-### `npm start`
+## 🚀 Features
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- Desktop-first UI with retro pixel art style
+- Search and filter Pokémon TCG cards
+- Add cards to your collection (personal Pokédex)
+- Real-time total collection value
+- Syncs with backend API
+- Responsive and fast (React)
+- Simple login and register system (if enabled by backend)
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+---
 
-### `npm test`
+## 🧰 Built With
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- React (Create React App)
+- Fetch API
+- CSS
+- Pixel art assets (custom)
 
-### `npm run build`
+---
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## 🖼️ Preview
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### Home
+![Home](https://github.com/Uesone/pokecardcollectorfront/blob/master/screenshots/home.png?raw=true)
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### Trading Cards
+![Trading Cards](https://github.com/Uesone/pokecardcollectorfront/blob/master/screenshots/tradingcards.png?raw=true)
 
-### `npm run eject`
+### Pokedex
+![Pokedex](https://github.com/Uesone/pokecardcollectorfront/blob/master/screenshots/pokedex.png?raw=true)
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+### About Us
+![About Us](https://github.com/Uesone/pokecardcollectorfront/blob/master/screenshots/aboutus.png?raw=true)
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+---
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+## 📦 Getting Started
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+Clone the repository and install dependencies:
 
-## Learn More
+```bash
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+git clone https://github.com/Uesone/pokecardcollectorfront.git
+cd pokecardcollectorfront
+npm install
+npm start
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+⚙️ Configuration
+If you use environment variables (for example, to set your backend API URL),
 
-### Code Splitting
+create a .env file in the root directory (do not commit this file) like:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+REACT_APP_API_URL=http://localhost:3001
 
-### Analyzing the Bundle Size
+⚠️ Never commit your real .env file!
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+Add .env to your .gitignore.
+You can provide a safe .env.example (without real secrets) in the repo.
 
-### Making a Progressive Web App
+📁 Folder Structure
+arduino
+Copy
+Edit
+pokecardcollectorfront/
+│
+├── public/
+│   ├── index.html
+│   └── favicon.ico
+├── src/
+│   ├── App.css
+│   ├── App.js
+│   ├── Card.js
+│   ├── CardList.js
+│   ├── Collezione.js
+│   ├── Collezione.css
+│   ├── index.css
+│   ├── index.js
+│   ├── Login.js
+│   ├── Navbar.js
+│   ├── Pokedex.js
+│   ├── Register.js
+│   ├── SearchBar.js
+│   └── ... (other components)
+├── screenshots/
+│   ├── home.png
+│   ├── tradingcards.png
+│   ├── pokedex.png
+│   └── aboutus.png
+├── .env           (not committed)
+├── package.json
+└── ...
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+📄 License
+This project is open source.
 
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Made with ☕ and pixels by Umberto Amoroso
