@@ -68,9 +68,7 @@ Add .env to your .gitignore.
 You can provide a safe .env.example (without real secrets) in the repo.
 
 📁 Folder Structure
-arduino
-Copy
-Edit
+
 pokecardcollectorfront/
 │
 ├── public/
