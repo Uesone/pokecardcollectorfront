@@ -1,9 +1,15 @@
 # 💻 Pokedecks – Frontend
 
+---
+
+![In Progress](https://img.shields.io/badge/status-in%20progress-yellow)
+
+---
 Pixel art web app for Pokémon TCG lovers!  
 Search, collect, and track your cards in your personal Pokédex — see the total value of your collection in real time.
 
-> **Note:** Pokedecks is currently available **only as a desktop web app**.
+> **Note:** Pokedecks is currently available **only as a desktop web app**.  
+> 📱 *Mobile version is under development and coming soon!*
 
 ---
 
