@@ -103,8 +103,11 @@ pokecardcollectorfront/
 ├── .env           (not committed)
 ├── package.json
 └── ...
+```
 
-📄 License
+📄 License  
 This project is open source.
+
+----
 
 Made with ☕ and pixels by Umberto Amoroso
